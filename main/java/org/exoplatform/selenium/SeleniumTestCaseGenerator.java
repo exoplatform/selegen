@@ -99,7 +99,7 @@ public class SeleniumTestCaseGenerator {
 		sb.append("  timeoutSecInt = Integer.parseInt(timeout)/1000;\n");		
 		sb.append("  speed = System.getProperty(\"selenium.speed\", speed);\n");
 		sb.append("  host = System.getProperty(\"selenium.host\", host);\n");
-		sb.append("  super.setUp(\"http://\" + host + \":8080/portal/\", \"*\" + browser);\n");
+		sb.append("  super.setUp(\"http://\" + host + \":8080/\", \"*\" + browser);\n");
 		sb.append("}\n\n");
 	}
 
