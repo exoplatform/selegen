@@ -7,19 +7,20 @@
     <version>8</version>
   </parent>
 
-  <scm>
-    <connection>scm:svn:http://svn.exoplatform.org/projects/utils/testing/exo-selegen/trunk</connection>
-    <developerConnection>scm:svn:http://svn.exoplatform.org/projects/utils/testing/exo-selegen/trunk</developerConnection>
-    <url>http://fisheye.exoplatform.org/browse/utils/testing/exo-selegen/trunk</url>
-  </scm>
-
   <groupId>org.exoplatform.utils.selegen</groupId>
   <artifactId>selegen-parent</artifactId>
     <version>0.9.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Selenium Generator for eXo Platform</name>
 
+  <scm>
+    <connection>scm:svn:http://svn.exoplatform.org/projects/utils/testing/exo-selegen/trunk</connection>
+    <developerConnection>scm:svn:http://svn.exoplatform.org/projects/utils/testing/exo-selegen/trunk</developerConnection>
+    <url>http://fisheye.exoplatform.org/browse/utils/testing/exo-selegen/trunk</url>
+  </scm>
+
   <properties>
+      <jdk.min.version>1.6</jdk.min.version>
   </properties>
 
   <modules>
@@ -27,7 +28,7 @@
      <module>selegen-core</module>
      <module>user-extension</module>
      <module>selegen-test</module>
+    <module>selegen.test</module>
   </modules>
-
 
 </project>
