@@ -1,0 +1,12 @@
+<archetype-descriptor name="selegen.archetype">
+
+  <fileSets>
+    <fileSet filtered="true">
+      <directory>src/suite</directory>
+      <includes>
+        <include>**/*</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+
+</archetype-descriptor>
