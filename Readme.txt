@@ -36,37 +36,12 @@ Informations:
 ******************************
 Known Issues:
 ******************************
+* Known
 
-For Mac OSX Snow Leopard Users:
-* Known Issue make FF to crash : http://jira.openqa.org/browse/SRC-743
-** Details for the fix : http://jira.openqa.org/browse/SRC-743?focusedCommentId=19345&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#action_19345
 
-For selenium-maven-plugin and JUnit Selenium users here is what worked for me:
+******************
+* Archetype usage
+******************
 
-* patch selenium-rc with this patch
-<begining of patch>
-Index: server-coreless/src/main/java/org/openqa/selenium/server/browserlaunchers/SystemUtils.java
-===================================================================
---- server-coreless/src/main/java/org/openqa/selenium/server/browserlaunchers/SystemUtils.java	(revision 7242)
-+++ server-coreless/src/main/java/org/openqa/selenium/server/browserlaunchers/SystemUtils.java	(working copy)
-@@ -14,7 +14,7 @@
-             return WindowsUtils.getExactPathEnvKey();
-         }
-         if (Os.isFamily("mac")) {
--            return "DYLD_LIBRARY_PATH";
-+            return "XXX_DYLD_LIBRARY_PATH";
-         }
-         // TODO other linux?
-         return "LD_LIBRARY_PATH";
-<end of patch>
-* checkout, patch & compile selenium-rc 1.0.2-SNAPSHOT (it requires the selenium-core to be compiled or get the SNAPSHOTs one the openqa repo)
-** http://svn.openqa.org/svn/selenium-rc/trunk
-** http://svn.openqa.org/svn/selenium-core/trunk
-** checkout and patch the selenium-maven-plugin to use selenium-server 1.0.2-SNAPSHOT
-** http://svn.codehaus.org/mojo/trunk/mojo/selenium-maven-plugin
-** Change the dependency 1.0.1 to 1.0.2-SNAPSHOT
-
-Then in this project you can force the use of those versions:
-* mvn install -Pselenium -Denforcer.skip=true -Dorg.selenium.maven-plugin.version=1.1-SNAPSHOT -Dorg.selenium.server.version=1.0.2-SNAPSHOT
-* mvn eclipse:eclipse -Pselenium -Denforcer.skip=true -Dorg.selenium.maven-plugin.version=1.1-SNAPSHOT -Dorg.selenium.server.version=1.0.2-SNAPSHOT
+mvn archetype:generate -DarchetypeGroupId=org.exoplatform.utils.selegen -DarchetypeArtifactId=exo-selegen-archetype -DarchetypeVersion=0.9.1-SNAPSHOT -DgroupId=org.exoplatform.test -DartifactId=selenium
 
