@@ -28,7 +28,6 @@
      <module>selegen-core</module>
      <module>user-extension</module>
      <module>selegen-test</module>
-    <module>selegen.test</module>
   </modules>
 
 </project>
