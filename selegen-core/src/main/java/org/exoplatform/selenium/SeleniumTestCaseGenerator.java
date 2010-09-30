@@ -1,4 +1,4 @@
-package org.exoplatform.portal.selenium;
+package org.exoplatform.selenium;
 
 import java.io.File;
 import java.io.IOException;
