@@ -336,7 +336,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("\", selenium.getValue(\"");
 				sb.append(param2);
 				sb.append("\"));\n");
-                  }else if (param1.equals("waitForAlert")) {
+            }else if (param1.equals("waitForAlert")) {
 				sb.append("waitForAlert(\"");
 				sb.append(param2);
 				sb.append("\");\n");
@@ -432,7 +432,42 @@ public class SeleniumTestCaseGenerator {
 				sb.append("}\n");
 			} else if (param1.equals("refresh")) {
 				sb.append("selenium.refresh();\n");
-			} else if (param1.equals("refreshAndWait")) {
+			} 
+			//-----------------add by linh_vu------------
+			else if (param1.equals("waitForChecked")) {
+				sb.append("for (int second = 0;; second++) {\n");
+				sb.append(getTimeoutMessage(param1));
+				sb.append("try {\nif (!selenium.isChecked(\"");
+				sb.append(param2);
+				sb.append("\"))\n break;\n }\n catch (Exception e) {}\n");
+				sb.append("Thread.sleep(1000);\n");
+				sb.append("}\n");
+			} else if (param1.equals("waitForLocation")) {
+				sb.append("for (int second = 0;; second++) {\n");
+				sb.append(getTimeoutMessage(param1));
+				sb.append("try {\n");
+				sb.append("if (selenium.getLocation().equals(\"");
+				sb.append(param2);
+				sb.append("\")) {\nbreak;\n}\n}\ncatch (Exception e) {\n}\n");
+				sb.append("Thread.sleep(1000);\n");
+				sb.append("}\n");
+			} else if (param1.equals("doubleClickAt")) {
+				sb.append("selenium.");
+				sb.append(param1);
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\", \"1,1\");\n");
+			} else if (param1.equals("verifySelectedLabel")) {
+				sb.append("TestCase.assertTrue");
+				sb.append("(selenium.getSelectedLabel(\"");
+				sb.append(param2);
+				sb.append("\").equals(\"");
+				sb.append(param3);
+				sb.append("\"));\n");
+			}
+			//-----------------------------	
+			
+			else if (param1.equals("refreshAndWait")) {
 				sb.append("selenium.refresh();\n");
 				sb.append("selenium.waitForPageToLoad(timeout);\n");
 			} else if (param1.equals("storeXpathCount")) {
