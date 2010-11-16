@@ -55,3 +55,4 @@ mvn archetype:generate -DarchetypeGroupId=org.exoplatform.utils.selegen -Darchet
 cd selenium
 mvn install -Pselenium
 
+
