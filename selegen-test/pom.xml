@@ -23,6 +23,7 @@
     <selenium.browser>firefox</selenium.browser>
     <selenium.timeout>30000</selenium.timeout>
     <selenium.speed>300</selenium.speed>
+	<selenium.host.port>:8080</selenium.host.port>
   </properties>
 
   <dependencies>
@@ -155,8 +156,8 @@
                   <includes><include>**/selenium/Test_*.java</include></includes>
                   <systemProperties>
                     <property>
-                      <name>selenium.port</name>
-                      <value>${selenium.port}</value>
+                      <name>selenium.host.port</name>
+                      <value>${selenium.host.port}</value>
                     </property>
                     <property>
                       <name>selenium.browser</name>

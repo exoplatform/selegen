@@ -26,6 +26,7 @@
     <selenium.browser>firefox</selenium.browser>
     <selenium.timeout>10000</selenium.timeout>
     <selenium.speed>300</selenium.speed>
+	<selenium.host.port>:8080</selenium.host.port>
   </properties>
 
   <dependencies>
