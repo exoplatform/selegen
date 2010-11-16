@@ -23,7 +23,8 @@
     <selenium.browser>firefox</selenium.browser>
     <selenium.timeout>30000</selenium.timeout>
     <selenium.speed>300</selenium.speed>
-	<selenium.host.port>:8080</selenium.host.port>
+    <selenium.host>localhost</selenium.host>
+    <selenium.host.port>8080</selenium.host.port>
   </properties>
 
   <dependencies>
@@ -99,8 +100,6 @@
           </execution>
         </executions>
       </plugin>
-
-          
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
@@ -155,6 +154,14 @@
                   <skip>false</skip>
                   <includes><include>**/selenium/Test_*.java</include></includes>
                   <systemProperties>
+                    <property>
+                      <name>selenium.port</name>
+                      <value>${selenium.port}</value>
+                    </property>
+                    <property>
+                      <name>selenium.host</name>
+                      <value>${selenium.host}</value>
+                    </property>
                     <property>
                       <name>selenium.host.port</name>
                       <value>${selenium.host.port}</value>

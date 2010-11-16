@@ -92,7 +92,7 @@ public class SeleniumTestCaseGenerator {
 		sb.append("public int timeoutSecInt = 30;\n");
 		sb.append("public String browser = \"firefox\";\n");
         sb.append("public String host = \"localhost\";\n");
-        sb.append("public String hostPort = \":8080\";\n");		
+        sb.append("public String hostPort = \"8080\";\n");		
 		sb.append("public void setSpeed() {\n  selenium.setSpeed(speed);\n}\n\n");
 		sb.append("public void setUp() throws Exception {\n");
 		sb.append("  browser = System.getProperty(\"selenium.browser\", browser);\n");
@@ -101,7 +101,7 @@ public class SeleniumTestCaseGenerator {
 		sb.append("  speed = System.getProperty(\"selenium.speed\", speed);\n");
         sb.append("  host = System.getProperty(\"selenium.host\", host);\n");
         sb.append("  hostPort = System.getProperty(\"selenium.host.port\", hostPort);\n");
-		sb.append("  super.setUp(\"http://\" + host + \"\" + hostPort + \"/portal/\", \"*\" + browser);\n");
+		sb.append("  super.setUp(\"http://\" + host + \":\" + hostPort + \"/portal/\", \"*\" + browser);\n");
 		sb.append("}\n\n");
 	}
 
