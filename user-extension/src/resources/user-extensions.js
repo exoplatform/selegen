@@ -75,8 +75,8 @@ Selenium.prototype.doComponentExoDoubleClick = function(locator){
 
 };
 
-add by linh_vu
 /**
+ * add by linh_vu
  * storeValue, storeText, storeAttribute and store actions now 
  * have 'global' equivalents.
  * Use storeValueGlobal, storeTextGlobal, storeAttributeGlobal or storeGlobal
