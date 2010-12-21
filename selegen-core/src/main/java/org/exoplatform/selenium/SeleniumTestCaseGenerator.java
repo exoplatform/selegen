@@ -496,6 +496,14 @@ public class SeleniumTestCaseGenerator {
 				sb.append("\", \"");
 				sb.append(param3);
 				sb.append("\");\n");
+			} else if (param1.equals("keyUp")) {
+				sb.append("selenium.");
+				sb.append(param1);
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\", \"");
+				sb.append(param3);
+				sb.append("\");\n");
 			} else if (param1.equals("verifyAttribute")) {
 				sb.append("TestCase.assertTrue");
 				sb.append("(selenium.getAttribute(\"");
