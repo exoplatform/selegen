@@ -386,6 +386,95 @@ public class SeleniumTestCaseGenerator {
 				sb.append("(\"");
 				sb.append(param2);
 				sb.append("\"));\n");
+			//-----------------add by linh_vu------------
+             } else if (param1.equals("verifySelectedValue")) {
+				sb.append("TestCase.assertTrue");
+				sb.append("(selenium.getSelectedValue(\"");
+				sb.append(param2);
+				sb.append("\").equals(\"");
+				sb.append(param3);
+				sb.append("\"));\n");
+             } else if (param1.equals("verifyNotVisible")) {
+				sb.append("TestCase.assertFalse(selenium.isVisible");
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\"));\n");
+             } else if (param1.equals("waitForVisible")) {
+				sb.append("for (int second = 0;; second++) {\n");
+				sb.append(getTimeoutMessage(param1));
+				sb.append("try {\nif (selenium.isVisible(\"");
+				sb.append(param2);
+				sb.append("\"))\n break;\n }\n catch (Exception e) {}\n");
+				sb.append("Thread.sleep(1000);\n");
+				sb.append("}\n");
+			} else if (param1.equals("waitForChecked")) {
+				sb.append("for (int second = 0;; second++) {\n");
+				sb.append(getTimeoutMessage(param1));
+				sb.append("try {\nif (selenium.isChecked(\"");
+				sb.append(param2);
+				sb.append("\"))\n break;\n }\n catch (Exception e) {}\n");
+				sb.append("Thread.sleep(1000);\n");
+				sb.append("}\n");
+			}else if (param1.equals("waitForNotChecked")) {
+				sb.append("for (int second = 0;; second++) {\n");
+				sb.append(getTimeoutMessage(param1));
+				sb.append("try {\nif (!selenium.isChecked(\"");
+				sb.append(param2);
+				sb.append("\"))\n break;\n }\n catch (Exception e) {}\n");
+				sb.append("Thread.sleep(1000);\n");
+				sb.append("}\n");
+			} else if (param1.equals("waitForLocation")) {
+				sb.append("for (int second = 0;; second++) {\n");
+				sb.append(getTimeoutMessage(param1));
+				sb.append("try {\n");
+				sb.append("if (selenium.getLocation().equals(\"");
+				sb.append(param2);
+				sb.append("\")) {\nbreak;\n}\n}\ncatch (Exception e) {\n}\n");
+				sb.append("Thread.sleep(1000);\n");
+				sb.append("}\n");
+			} else if (param1.equals("waitForSelectedValue")) {
+				sb.append("TestCase.assertTrue(selenium.getSelectedValue(\"");
+				sb.append(param2);
+				sb.append("\").matches(\"^");
+				sb.append(param3);
+				sb.append("$\"));\n");
+			} else if (param1.equals("waitForAttribute")) {
+				sb.append("TestCase.assertTrue(selenium.getAttribute(\"");
+				sb.append(param2);
+				sb.append("\").matches(\"^");
+				sb.append(param3);
+				sb.append("$\"));\n");
+			} else if (param1.equals("doubleClickAt")|| param1.equals("focus") ) {
+				sb.append("selenium.");
+				sb.append(param1);
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\", \"1,1\");\n");
+			} else if (param1.equals("verifySelectedLabel")) {
+				sb.append("TestCase.assertTrue");
+				sb.append("(selenium.getSelectedLabel(\"");
+				sb.append(param2);
+				sb.append("\").equals(\"");
+				sb.append(param3);
+				sb.append("\"));\n");
+			}else if (param1.equals("storeEval")) {
+				sb.append("String ").append(param3).append(" = selenium.getEval(\"").append(param2).append("\").toString();\n");
+			}else if (param1.equals("keyDown")) {
+				sb.append("selenium.");
+				sb.append(param1);
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\", \"");
+				sb.append(param3);
+				sb.append("\");\n");
+			} else if (param1.equals("verifyAttribute")) {
+				sb.append("TestCase.assertTrue");
+				sb.append("(selenium.getAttribute(\"");
+				sb.append(param2);
+				sb.append("\").equals(\"");
+				sb.append(param3);
+				sb.append("\"));\n");
+			//-----------------------------	
 			} else if (param1.equals("assertNotVisible")) {
 				sb.append("TestCase.assertFalse(selenium.isVisible");
 				sb.append("(\"");
@@ -436,59 +525,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("selenium.refresh();\n");
 			 
 			//-----------------add by linh_vu------------
-			}else if (param1.equals("waitForChecked")) {
-				sb.append("for (int second = 0;; second++) {\n");
-				sb.append(getTimeoutMessage(param1));
-				sb.append("try {\nif (selenium.isChecked(\"");
-				sb.append(param2);
-				sb.append("\"))\n break;\n }\n catch (Exception e) {}\n");
-				sb.append("Thread.sleep(1000);\n");
-				sb.append("}\n");
-			}else if (param1.equals("waitForNotChecked")) {
-				sb.append("for (int second = 0;; second++) {\n");
-				sb.append(getTimeoutMessage(param1));
-				sb.append("try {\nif (!selenium.isChecked(\"");
-				sb.append(param2);
-				sb.append("\"))\n break;\n }\n catch (Exception e) {}\n");
-				sb.append("Thread.sleep(1000);\n");
-				sb.append("}\n");
-			} else if (param1.equals("waitForLocation")) {
-				sb.append("for (int second = 0;; second++) {\n");
-				sb.append(getTimeoutMessage(param1));
-				sb.append("try {\n");
-				sb.append("if (selenium.getLocation().equals(\"");
-				sb.append(param2);
-				sb.append("\")) {\nbreak;\n}\n}\ncatch (Exception e) {\n}\n");
-				sb.append("Thread.sleep(1000);\n");
-				sb.append("}\n");
-			} else if (param1.equals("waitForSelectedValue")) {
-				sb.append("TestCase.assertTrue(selenium.getSelectedValue(\"");
-				sb.append(param2);
-				sb.append("\").matches(\"^");
-				sb.append(param3);
-				sb.append("$\"));\n");
-			} else if (param1.equals("waitForAttribute")) {
-				sb.append("TestCase.assertTrue(selenium.getAttribute(\"");
-				sb.append(param2);
-				sb.append("\").matches(\"^");
-				sb.append(param3);
-				sb.append("$\"));\n");
-			} else if (param1.equals("doubleClickAt") || param1.equals("focus")) {
-				sb.append("selenium.");
-				sb.append(param1);
-				sb.append("(\"");
-				sb.append(param2);
-				sb.append("\", \"1,1\");\n");
-			} else if (param1.equals("verifySelectedLabel")) {
-				sb.append("TestCase.assertTrue");
-				sb.append("(selenium.getSelectedLabel(\"");
-				sb.append(param2);
-				sb.append("\").equals(\"");
-				sb.append(param3);
-				sb.append("\"));\n");
-			}else if (param1.equals("storeEval")) {
-				sb.append("String ").append(param3).append(" = selenium.getEval(\"").append(param2).append("\").toString();\n");
-			}else if (param1.equals("keyDown")) {
+			} else if (param1.equals("keyDown")) {
 				sb.append("selenium.");
 				sb.append(param1);
 				sb.append("(\"");
@@ -504,22 +541,6 @@ public class SeleniumTestCaseGenerator {
 				sb.append("\", \"");
 				sb.append(param3);
 				sb.append("\");\n");
-			} else if (param1.equals("verifyAttribute")) {
-				sb.append("TestCase.assertTrue");
-				sb.append("(selenium.getAttribute(\"");
-				sb.append(param2);
-				sb.append("\").equals(\"");
-				sb.append(param3);
-				sb.append("\"));\n");
-
-			} else if (param1.equals("typeRandom")) {
-				sb.append("selenium.getEval(\"selenium.doTypeRandom(\"");
-				sb.append(param2);
-				sb.append("\", \"");
-				sb.append(param3);
-				sb.append("\");\n");
-				sb.append("selenium.waitForPageToLoad(timeout);\n");
-
 			} else if (param1.equals("storeValue")) {
 				sb.append("String ");
 				sb.append(param3);
@@ -534,20 +555,16 @@ public class SeleniumTestCaseGenerator {
 
 			//-----------------------------	
 			
-			}else if (param1.equals("refreshAndWait")) {
+			} else if (param1.equals("refreshAndWait")) {
 				sb.append("selenium.refresh();\n");
 				sb.append("selenium.waitForPageToLoad(timeout);\n");
-
 			}else if (param1.equals("storeXpathCount")) {
 				sb.append("String ").append(param3).append(" = selenium.getXpathCount(\"").append(param2).append(
 				      "\").toString();\n");
-
 			}else if (param1.equals("verifyOrdered")) {
 				sb.append("selenium.isOrdered(\"").append(param2).append("\",\"").append(param3).append("\");\n"); 
-
 			}else if (param1.equals("dragAndDropToObject")) {
 				sb.append("selenium.dragAndDropToObject(\"").append(param2).append("\",\"").append(param3).append("\");\n");
-
 			} else if (param1.equals("componentExoContextMenu")) {
 				sb.append("selenium.getEval(\"selenium.doComponentExoContextMenu(\\\"").append(param2)
 				      .append("\\\")\");\n");
