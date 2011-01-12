@@ -197,7 +197,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append(param2);
 				sb.append("\"));\n");
 			} else if (param1.equals("click") ||param1.equals("contextMenu") || param1.equals("mouseDown") || param1.equals("doubleClick") || param1.equals("mouseDownRight")|| param1.equals("mouseUp")
-			      || param1.equals("open") || param1.equals("selectFrame") || param1.equals("selectWindow")) {
+			      || param1.equals("open") || param1.equals("selectFrame") || param1.equals("selectWindow")|| param1.equals("focus")) {
 				sb.append("selenium.");
 				sb.append(param1);
 				sb.append("(\"");
@@ -444,7 +444,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("\").matches(\"^");
 				sb.append(param3);
 				sb.append("$\"));\n");
-			} else if (param1.equals("doubleClickAt")|| param1.equals("focus") ) {
+			} else if (param1.equals("doubleClickAt")) {
 				sb.append("selenium.");
 				sb.append(param1);
 				sb.append("(\"");
