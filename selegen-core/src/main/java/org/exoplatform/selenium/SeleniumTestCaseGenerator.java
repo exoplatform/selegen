@@ -554,7 +554,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append(");\n");
                         } else if (param1.equals("verifyLocation")){
 				sb.append("TestCase.assertTrue");
-				sb.append("(selenium.isTextPresent(\"");
+				sb.append("(selenium.getLocation(\"");
 				sb.append(param2);
 				sb.append("\"));\n");
 		        //-----------------------------	
