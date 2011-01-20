@@ -552,11 +552,10 @@ public class SeleniumTestCaseGenerator {
 				sb.append("\", ");
 				sb.append(param3);
 				sb.append(");\n");
-                        } else if (param1.equals("verifyLocation")){
-				sb.append("TestCase.assertTrue");
-				sb.append("(selenium.getLocation(\"");
-				sb.append(param2);
-				sb.append("\"));\n");
+                        } else if (param1.equals("verifyLocation")) {
+				sb.append("TestCase.assertEquals(\"");
+              			sb.append(param2);
+				sb.append("\", selenium.getLocation());\n");
 		        //-----------------------------	
 			
 			} else if (param1.equals("refreshAndWait")) {
