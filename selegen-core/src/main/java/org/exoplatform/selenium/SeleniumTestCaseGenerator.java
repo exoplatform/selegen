@@ -387,6 +387,14 @@ public class SeleniumTestCaseGenerator {
 				sb.append(param2);
 				sb.append("\"));\n");
 			//-----------------add by linh_vu------------
+                        } else if (param1.equals("waitForNotVisible")) {
+				sb.append("for (int second = 0;; second++) {\n");
+				sb.append(getTimeoutMessage(param1));
+				sb.append("try {\nif (!selenium.isVisible(\"");
+				sb.append(param2);
+				sb.append("\"))\n break;\n }\n catch (Exception e) {}\n");
+				sb.append("Thread.sleep(1000);\n");
+				sb.append("}\n");
                         } else if (param1.equals("verifySelectedValue")) {
 				sb.append("TestCase.assertTrue");
 				sb.append("(selenium.getSelectedValue(\"");
@@ -556,22 +564,29 @@ public class SeleniumTestCaseGenerator {
 				sb.append("TestCase.assertEquals(\"");
               			sb.append(param2);
 				sb.append("\", selenium.getLocation());\n");
-		        //-----------------------------	
+
+                        } else if (param1.equals("TypeRandom")) {
+				sb.append("selenium.getEval(\"selenium.doTypeRandom(\\\"");
+                                sb.append(param2);
+				sb.append("\\\",\\\"");
+                                sb.append(param3);
+				sb.append("\\\"));\n");
+		        //-------------------------------------
 			
 			} else if (param1.equals("refreshAndWait")) {
 				sb.append("selenium.refresh();\n");
 				sb.append("selenium.waitForPageToLoad(timeout);\n");
-			}else if (param1.equals("storeXpathCount")) {
+			} else if (param1.equals("storeXpathCount")) {
 				sb.append("String ").append(param3).append(" = selenium.getXpathCount(\"").append(param2).append(
 				      "\").toString();\n");
-			}else if (param1.equals("verifyOrdered")) {
+			} else if (param1.equals("verifyOrdered")) {
 				sb.append("selenium.isOrdered(\"").append(param2).append("\",\"").append(param3).append("\");\n"); 
-			}else if (param1.equals("dragAndDropToObject")) {
+			} else if (param1.equals("dragAndDropToObject")) {
 				sb.append("selenium.dragAndDropToObject(\"").append(param2).append("\",\"").append(param3).append("\");\n");
 			} else if (param1.equals("componentExoContextMenu")) {
 				sb.append("selenium.getEval(\"selenium.doComponentExoContextMenu(\\\"").append(param2)
 				      .append("\\\")\");\n");
-			}else if (param1.equals("componentExoContextMenuAndWait")) {
+			} else if (param1.equals("componentExoContextMenuAndWait")) {
 				sb.append("selenium.doComponentExoContextMenu(\"");
 				sb.append(param2);
 				sb.append("\");\n");
@@ -580,7 +595,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("selenium.getEval(\"selenium.doGetExoExtensionVersion(\\\"").append(param2).append("\\\")\");\n");
 			} else if (param1.equals("componentExoDoubleClick")) {
 				sb.append("selenium.getEval(\"selenium.doComponentExoDoubleClick(\\\"").append(param2).append("\\\")\");\n");
-			}else if (param1.equals("checkAndWait")) {
+			} else if (param1.equals("checkAndWait")) {
 				sb.append("selenium.check(\"");
 				sb.append(param2);
 				sb.append("\");\n");

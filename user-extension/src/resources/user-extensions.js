@@ -87,7 +87,7 @@ Selenium.prototype.doTypeRepeated = function(locator, text) {
     this.page().replaceText(element, valueToType);
 };
 //--------------------------------
-Selenium.prototype.doTypeRandom = function randomString(locator,string_length) {
+Selenium.prototype.doTypeRandom = function(locator,string_length) {
 
 	var element = this.page().findElement(locator);
 
