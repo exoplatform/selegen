@@ -69,9 +69,16 @@ public class SeleniumTestCaseGenerator {
 		StringBuffer sb = new StringBuffer();
 		sb.append("package " + testPackagePath + ";\n\n");
 		// sb.append("import org.exoplatform.util.selenium.BaseTestCase;\n");
-		sb.append("import junit.framework.TestCase;\n");
-		sb.append("import com.thoughtworks.selenium.*;\n");
-		sb.append("public class " + testName + " extends SeleneseTestCase {\n");
+		sb.append("import com.thoughtworks.selenium.Selenium;\n");
+		sb.append("import org.openqa.selenium.*;\n");
+		sb.append("import org.openqa.selenium.firefox.*;\n");
+		sb.append("import org.openqa.selenium.support.ui.Wait;\n");
+		sb.append("import org.openqa.selenium.support.ui.WebDriverWait;\n");
+		sb.append("import org.junit.*;\n");
+                sb.append("import static org.junit.Assert.*;\n\n");
+	
+		sb.append("public class " + testName + " {\n\n");
+
 
 		// setSpeed & setUp
 		appendCommonMethods(sb);
@@ -87,22 +94,36 @@ public class SeleniumTestCaseGenerator {
 	}
 
 	private void appendCommonMethods(StringBuffer sb) {
+                sb.append("WebDriver driver;\n");
+		sb.append("Selenium selenium;\n");
+                sb.append("Wait<WebDriver> wait;\n\n");
 		sb.append("public String speed = \"100\";\n");
 		sb.append("public String timeout = \"30000\";\n");
 		sb.append("public int timeoutSecInt = 30;\n");
 		sb.append("public String browser = \"firefox\";\n");
-        sb.append("public String host = \"localhost\";\n");
-        sb.append("public String hostPort = \"8080\";\n");		
+                sb.append("public String host = \"localhost\";\n");
+                sb.append("public String hostPort = \"8080\";\n\n");	
+	
 		sb.append("public void setSpeed() {\n  selenium.setSpeed(speed);\n}\n\n");
-		sb.append("public void setUp() throws Exception {\n");
-		sb.append("  browser = System.getProperty(\"selenium.browser\", browser);\n");
-		sb.append("  timeout = System.getProperty(\"selenium.timeout\", timeout);\n");
-		sb.append("  timeoutSecInt = Integer.parseInt(timeout)/1000;\n");		
-		sb.append("  speed = System.getProperty(\"selenium.speed\", speed);\n");
-        sb.append("  host = System.getProperty(\"selenium.host\", host);\n");
-        sb.append("  hostPort = System.getProperty(\"selenium.host.port\", hostPort);\n");
-		sb.append("  super.setUp(\"http://\" + host + \":\" + hostPort + \"/portal/\", \"*\" + browser);\n");
-		sb.append("}\n\n");
+
+		sb.append("public void startSelenium() {\n");
+sb.append("  driver = new FirefoxDriver();\n");
+sb.append("  wait = new WebDriverWait(driver, 30);\n");
+        	//sb.append("  browser = System.getProperty(\"selenium.browser\", browser);\n");
+		//sb.append("  timeout = System.getProperty(\"selenium.timeout\", timeout);\n");
+		//sb.append("  timeoutSecInt = Integer.parseInt(timeout)/1000;\n");		
+		//sb.append("  speed = System.getProperty(\"selenium.speed\", speed);\n");
+                //sb.append("  host = System.getProperty(\"selenium.host\", host);\n");
+                //sb.append("  hostPort = System.getProperty(\"selenium.host.port\", hostPort);\n\n");
+
+
+		//selenium = new WebDriverBackedSelenium(driver, "http://localhost:8080");
+
+sb.append(" selenium = new WebDriverBackedSelenium(driver, \"http://localhost:8080\");\n");
+sb.append("}\n\n");
+
+sb.append("  public void stopSelenium() {\n");
+sb.append("  driver.close();\n}\n\n");
 	}
 
 	private void appendTest(StringBuffer sb, String scriptFile, String testName, String testMethodName) throws Exception {
@@ -112,7 +133,7 @@ public class SeleniumTestCaseGenerator {
 		System.out.println("* " + basedir + "/" + scriptFile);
 
 		// Method
-		sb.append("public void " + testMethodName + "() throws Exception {\n");
+		sb.append("public void " + testMethodName + "() throws InterruptedException {\n");
 		sb.append("  setSpeed();\n");
 
 		if ((xml.indexOf("<title>" + testName + "</title>") == -1)
@@ -161,37 +182,37 @@ public class SeleniumTestCaseGenerator {
 			sb.append("\n  //" + count + ": " + param1 + " | " + param2 + " | " + param3 + "\n");
 			if (param1.equals("assertConfirmation")) {
 				param2 = replace(param2, "?", "[\\\\s\\\\S]");
-				sb.append("TestCase.assertTrue(selenium.getConfirmation().matches(\"^");
+				sb.append("assertTrue(selenium.getConfirmation().matches(\"^");
 				sb.append(param2);
 				sb.append("$\"));\n");
 			} else if (param1.equals("assertAlert")) {
-				sb.append("TestCase.assertTrue(selenium.getAlert().matches(\"^");
+				sb.append("assertTrue(selenium.getAlert().matches(\"^");
 				sb.append(param2);
 				sb.append("$\"));\n");
 			}else if (param1.equals("assertLocation")) {
-				sb.append("TestCase.assertTrue(selenium.getLocation().matches(\"^");
+				sb.append("assertTrue(selenium.getLocation().matches(\"^");
 				sb.append(param2);
 				sb.append("$\"));\n");
 			}else if (param1.equals("waitForValue")) {
-				sb.append("TestCase.assertTrue(selenium.getValue(\"");
+				sb.append("assertTrue(selenium.getValue(\"");
 				sb.append(param2);
 				sb.append("\").matches(\"^");
 				sb.append(param3);
 				sb.append("$\"));\n");
 			} else if (param1.equals("assertElementPresent") || param1.equals("assertElementNotPresent")) {
 				if (param1.equals("assertElementPresent")) {
-					sb.append("TestCase.assertTrue");
+					sb.append("assertTrue");
 				} else if (param1.equals("assertElementNotPresent")) {
-					sb.append("TestCase.assertFalse");
+					sb.append("assertFalse");
 				}
 				sb.append("(selenium.isElementPresent(\"");
 				sb.append(param2);
 				sb.append("\"));\n");
 			} else if (param1.equals("assertTextPresent") || param1.equals("assertTextNotPresent")) {
 				if (param1.equals("assertTextPresent")) {
-					sb.append("TestCase.assertTrue");
+					sb.append("assertTrue");
 				} else if (param1.equals("assertTextNotPresent")) {
-					sb.append("TestCase.assertFalse");
+					sb.append("assertFalse");
 				}
 				sb.append("(selenium.isTextPresent(\"");
 				sb.append(param2);
@@ -256,31 +277,31 @@ public class SeleniumTestCaseGenerator {
 				sb.append(");\n");
 			} else if (param1.equals("verifyElementPresent") || param1.equals("verifyElementNotPresent")) {
 				if (param1.equals("verifyElementPresent")) {
-					sb.append("TestCase.assertTrue");
+					sb.append("assertTrue");
 				} else if (param1.equals("verifyElementNotPresent")) {
-					sb.append("TestCase.assertFalse");
+					sb.append("assertFalse");
 				}
 				sb.append("(selenium.isElementPresent(\"");
 				sb.append(param2);
 				sb.append("\"));\n");
 			} else if (param1.equals("verifyTextPresent") || param1.equals("verifyTextNotPresent")) {
 				if (param1.equals("verifyTextPresent")) {
-					sb.append("TestCase.assertTrue");
+					sb.append("assertTrue");
 				} else if (param1.equals("verifyTextNotPresent")) {
-					sb.append("TestCase.assertFalse");
+					sb.append("assertFalse");
 				}
 				sb.append("(selenium.isTextPresent(\"");
 				sb.append(param2);
 				sb.append("\"));\n");
 			} else if (param1.equals("verifyText")) {
-				sb.append("TestCase.assertTrue");
+				sb.append("assertTrue");
 				sb.append("(selenium.getText(\"");
 				sb.append(param2);
 				sb.append("\").equals(\"");
 				sb.append(param3);
 				sb.append("\"));\n");
 			} else if (param1.equals("verifyTitle")) {
-				sb.append("TestCase.assertEquals(\"");
+				sb.append("assertEquals(\"");
 				sb.append(param2);
 				sb.append("\", selenium.getTitle());\n");
 			} else if (param1.equals("waitForElementNotPresent")) {
@@ -333,7 +354,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append(param3);
 				sb.append("\");\n");
 			} else if (param1.equals("verifyValue")) {
-				sb.append("TestCase.assertEquals(\"");
+				sb.append("assertEquals(\"");
 				sb.append(param3);
 				sb.append("\", selenium.getValue(\"");
 				sb.append(param2);
@@ -360,7 +381,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("Thread.sleep(1000);\n");
 				sb.append("}\n");
 			} else if (param1.equals("verifyEval")) {
-				sb.append("TestCase.assertEquals(\"");
+				sb.append("assertEquals(\"");
 				sb.append(param3);
 				sb.append("\", selenium.getEval(\"");
 				sb.append(param2);
@@ -372,12 +393,12 @@ public class SeleniumTestCaseGenerator {
 				sb.append(param2);
 				sb.append("\");\n");
 			} else if (param1.equals("assertVisible")) {
-				sb.append("TestCase.assertTrue(selenium.isVisible");
+				sb.append("assertTrue(selenium.isVisible");
 				sb.append("(\"");
 				sb.append(param2);
 				sb.append("\"));\n");
 			} else if (param1.equals("verifyVisible")) {
-				sb.append("TestCase.assertTrue(selenium.isVisible");
+				sb.append("assertTrue(selenium.isVisible");
 				sb.append("(\"");
 				sb.append(param2);
 				sb.append("\"));\n");
@@ -396,14 +417,14 @@ public class SeleniumTestCaseGenerator {
 				sb.append("Thread.sleep(1000);\n");
 				sb.append("}\n");
                         } else if (param1.equals("verifySelectedValue")) {
-				sb.append("TestCase.assertTrue");
+				sb.append("assertTrue");
 				sb.append("(selenium.getSelectedValue(\"");
 				sb.append(param2);
 				sb.append("\").equals(\"");
 				sb.append(param3);
 				sb.append("\"));\n");
                         } else if (param1.equals("verifyNotVisible")) {
-				sb.append("TestCase.assertFalse(selenium.isVisible");
+				sb.append("assertFalse(selenium.isVisible");
 				sb.append("(\"");
 				sb.append(param2);
 				sb.append("\"));\n");
@@ -441,13 +462,13 @@ public class SeleniumTestCaseGenerator {
 				sb.append("Thread.sleep(1000);\n");
 				sb.append("}\n");
 			} else if (param1.equals("waitForSelectedValue")) {
-				sb.append("TestCase.assertTrue(selenium.getSelectedValue(\"");
+				sb.append("assertTrue(selenium.getSelectedValue(\"");
 				sb.append(param2);
 				sb.append("\").matches(\"^");
 				sb.append(param3);
 				sb.append("$\"));\n");
 			} else if (param1.equals("waitForAttribute")) {
-				sb.append("TestCase.assertTrue(selenium.getAttribute(\"");
+				sb.append("assertTrue(selenium.getAttribute(\"");
 				sb.append(param2);
 				sb.append("\").matches(\"^");
 				sb.append(param3);
@@ -459,7 +480,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append(param2);
 				sb.append("\", \"1,1\");\n");
 			} else if (param1.equals("verifySelectedLabel")) {
-				sb.append("TestCase.assertTrue");
+				sb.append("assertTrue");
 				sb.append("(selenium.getSelectedLabel(\"");
 				sb.append(param2);
 				sb.append("\").equals(\"");
@@ -476,7 +497,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append(param3);
 				sb.append("\");\n");
 			} else if (param1.equals("verifyAttribute")) {
-				sb.append("TestCase.assertTrue");
+				sb.append("assertTrue");
 				sb.append("(selenium.getAttribute(\"");
 				sb.append(param2);
 				sb.append("\").equals(\"");
@@ -484,7 +505,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("\"));\n");
 			//-----------------------------	
 			} else if (param1.equals("assertNotVisible")) {
-				sb.append("TestCase.assertFalse(selenium.isVisible");
+				sb.append("assertFalse(selenium.isVisible");
 				sb.append("(\"");
 				sb.append(param2);
 				sb.append("\"));\n");
@@ -497,7 +518,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append(param2);
 				sb.append("\");\n");			
                         } else if (param1.equals("assertValue")) {
-				sb.append("TestCase.assertEquals(\"");
+				sb.append("assertEquals(\"");
 				sb.append(param3);
 				sb.append("\", selenium.getValue(\"");
 				sb.append(param2);
@@ -561,7 +582,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append(param3);
 				sb.append(");\n");
                         } else if (param1.equals("verifyLocation")) {
-				sb.append("TestCase.assertEquals(\"");
+				sb.append("assertEquals(\"");
               			sb.append(param2);
 				sb.append("\", selenium.getLocation());\n");
 
