@@ -185,7 +185,7 @@ sb.append("  driver.close();\n}\n\n");
 				sb.append("(\"");
 				sb.append(param2);
 				sb.append("\");\n");
-                        } else if (param1.equals("click") || param1.equals("clickAndWait")) {
+                        } else if (param1.equals("click")) {
                                 sb.append("selenium.mouseOver");
 				sb.append("(\"");
 				sb.append(param2);
@@ -196,6 +196,16 @@ sb.append("  driver.close();\n}\n\n");
 				sb.append("(\"");
 				sb.append(param2);
 				sb.append("\");\n");
+			} else if (param1.equals("clickAndWait")) {
+                                sb.append("selenium.mouseOver");
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\");\n");
+
+				sb.append("selenium.click(\"");
+				sb.append(param2);
+				sb.append("\");\n");
+                                //sb.append("selenium.waitForPageToLoad(timeout);\n");
 			} else if (param1.equals("waitForElementPresent")) {
 				sb.append("for (int second = 0;; second++) {\n");
 				sb.append(getTimeoutMessage(param1));
