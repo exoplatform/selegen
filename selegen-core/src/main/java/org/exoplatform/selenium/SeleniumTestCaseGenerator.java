@@ -96,30 +96,29 @@ public class SeleniumTestCaseGenerator {
 	private void appendCommonMethods(StringBuffer sb) {
                 sb.append("WebDriver driver;\n");
 		sb.append("Selenium selenium;\n");
-                sb.append("Wait<WebDriver> wait;\n\n");
+                //sb.append("Wait<WebDriver> wait;\n\n");
 		sb.append("public String speed = \"100\";\n");
 		sb.append("public String timeout = \"30000\";\n");
 		sb.append("public int timeoutSecInt = 30;\n");
 		sb.append("public String browser = \"firefox\";\n");
                 sb.append("public String host = \"localhost\";\n");
                 sb.append("public String hostPort = \"8080\";\n\n");	
-	
 		sb.append("public void setSpeed() {\n  selenium.setSpeed(speed);\n}\n\n");
 
-		sb.append("public void startSelenium() {\n");
+sb.append("public void startSelenium() {\n");
 sb.append("  driver = new FirefoxDriver();\n");
-sb.append("  wait = new WebDriverWait(driver, 30);\n");
-        	//sb.append("  browser = System.getProperty(\"selenium.browser\", browser);\n");
+                //sb.append("  wait = new WebDriverWait(driver, 30);\n");
+        	/*sb.append("  browser = System.getProperty(\"selenium.browser\", browser);\n");
 		//sb.append("  timeout = System.getProperty(\"selenium.timeout\", timeout);\n");
 		//sb.append("  timeoutSecInt = Integer.parseInt(timeout)/1000;\n");		
 		//sb.append("  speed = System.getProperty(\"selenium.speed\", speed);\n");
                 //sb.append("  host = System.getProperty(\"selenium.host\", host);\n");
-                //sb.append("  hostPort = System.getProperty(\"selenium.host.port\", hostPort);\n\n");
+                //sb.append("  hostPort = System.getProperty(\"selenium.host.port\", hostPort);\n\n");*/
 
 
 		//selenium = new WebDriverBackedSelenium(driver, "http://localhost:8080");
 
-sb.append(" selenium = new WebDriverBackedSelenium(driver, \"http://localhost:8080\");\n");
+sb.append(" selenium = new WebDriverBackedSelenium(driver, \"http://192.168.3.7:18180\");\n");
 sb.append("}\n\n");
 
 sb.append("  public void stopSelenium() {\n");
@@ -180,138 +179,23 @@ sb.append("  driver.close();\n}\n\n");
 			param3 = param3.replaceAll("storedVars\\['([a-z0-9A-Z]*)'\\]", "'\" + $1 + \"'");
 
 			sb.append("\n  //" + count + ": " + param1 + " | " + param2 + " | " + param3 + "\n");
-			if (param1.equals("assertConfirmation")) {
-				param2 = replace(param2, "?", "[\\\\s\\\\S]");
-				sb.append("assertTrue(selenium.getConfirmation().matches(\"^");
-				sb.append(param2);
-				sb.append("$\"));\n");
-			} else if (param1.equals("assertAlert")) {
-				sb.append("assertTrue(selenium.getAlert().matches(\"^");
-				sb.append(param2);
-				sb.append("$\"));\n");
-			}else if (param1.equals("assertLocation")) {
-				sb.append("assertTrue(selenium.getLocation().matches(\"^");
-				sb.append(param2);
-				sb.append("$\"));\n");
-			}else if (param1.equals("waitForValue")) {
-				sb.append("assertTrue(selenium.getValue(\"");
-				sb.append(param2);
-				sb.append("\").matches(\"^");
-				sb.append(param3);
-				sb.append("$\"));\n");
-			} else if (param1.equals("assertElementPresent") || param1.equals("assertElementNotPresent")) {
-				if (param1.equals("assertElementPresent")) {
-					sb.append("assertTrue");
-				} else if (param1.equals("assertElementNotPresent")) {
-					sb.append("assertFalse");
-				}
-				sb.append("(selenium.isElementPresent(\"");
-				sb.append(param2);
-				sb.append("\"));\n");
-			} else if (param1.equals("assertTextPresent") || param1.equals("assertTextNotPresent")) {
-				if (param1.equals("assertTextPresent")) {
-					sb.append("assertTrue");
-				} else if (param1.equals("assertTextNotPresent")) {
-					sb.append("assertFalse");
-				}
-				sb.append("(selenium.isTextPresent(\"");
-				sb.append(param2);
-				sb.append("\"));\n");
-			} else if (param1.equals("click") ||param1.equals("contextMenu") || param1.equals("mouseDown") || param1.equals("doubleClick") || param1.equals("mouseDownRight")|| param1.equals("mouseUp")
-			      || param1.equals("open") || param1.equals("selectFrame") || param1.equals("selectWindow")|| param1.equals("focus")) {
+			if (param1.equals("open")) {
 				sb.append("selenium.");
 				sb.append(param1);
 				sb.append("(\"");
 				sb.append(param2);
 				sb.append("\");\n");
-			} else if (param1.equals("clickAndWait")) {
-				sb.append("selenium.click(\"");
+                        } else if (param1.equals("click") || param1.equals("clickAndWait")) {
+                                sb.append("selenium.mouseOver");
+				sb.append("(\"");
 				sb.append(param2);
 				sb.append("\");\n");
-				sb.append("selenium.waitForPageToLoad(timeout);\n");
-			} else if (param1.equals("clickAt")) {
+
 				sb.append("selenium.");
 				sb.append(param1);
 				sb.append("(\"");
 				sb.append(param2);
-				sb.append("\", \"1,1\");\n");
-			} else if (param1.equals("clickAtAndWait")) {
-				sb.append("selenium.clickAt(\"");
-				sb.append(param2);
-				sb.append("\", \"1,1\");\n");
-				sb.append("selenium.waitForPageToLoad(timeout);\n");
-			} else if (param1.equals("close") || param1.equals("chooseCancelOnNextConfirmation")) {
-				sb.append("selenium.");
-				sb.append(param1);
-				sb.append("();\n");
-			} else if (param1.equals("pause")) {
-				sb.append("Thread.sleep(");
-				sb.append(param2);
-				sb.append(");\n");
-			} else if (param1.equals("addSelection") || param1.equals("select") || param1.equals("type")
-			      || param1.equals("typeKeys") || param1.equals("waitForPopUp")) {
-				sb.append("selenium.");
-				sb.append(param1);
-				sb.append("(\"");
-				sb.append(param2);
-				sb.append("\", \"");
-				sb.append(param3);
 				sb.append("\");\n");
-			} else if (param1.equals("selectAndWait")) {
-				sb.append("selenium.select(\"");
-				sb.append(param2);
-				sb.append("\", \"");
-				sb.append(param3);
-				sb.append("\");\n");
-				sb.append("selenium.waitForPageToLoad(timeout);\n");
-			} else if (param1.equals("storeText")) {
-				sb.append("String ");
-				sb.append(param3);
-				sb.append(" = selenium.getText(\"");
-				sb.append(param2);
-				sb.append("\");\n");
-				sb.append("RuntimeVariables.setValue(\"");
-				sb.append(param3);
-				sb.append("\", ");
-				sb.append(param3);
-				sb.append(");\n");
-			} else if (param1.equals("verifyElementPresent") || param1.equals("verifyElementNotPresent")) {
-				if (param1.equals("verifyElementPresent")) {
-					sb.append("assertTrue");
-				} else if (param1.equals("verifyElementNotPresent")) {
-					sb.append("assertFalse");
-				}
-				sb.append("(selenium.isElementPresent(\"");
-				sb.append(param2);
-				sb.append("\"));\n");
-			} else if (param1.equals("verifyTextPresent") || param1.equals("verifyTextNotPresent")) {
-				if (param1.equals("verifyTextPresent")) {
-					sb.append("assertTrue");
-				} else if (param1.equals("verifyTextNotPresent")) {
-					sb.append("assertFalse");
-				}
-				sb.append("(selenium.isTextPresent(\"");
-				sb.append(param2);
-				sb.append("\"));\n");
-			} else if (param1.equals("verifyText")) {
-				sb.append("assertTrue");
-				sb.append("(selenium.getText(\"");
-				sb.append(param2);
-				sb.append("\").equals(\"");
-				sb.append(param3);
-				sb.append("\"));\n");
-			} else if (param1.equals("verifyTitle")) {
-				sb.append("assertEquals(\"");
-				sb.append(param2);
-				sb.append("\", selenium.getTitle());\n");
-			} else if (param1.equals("waitForElementNotPresent")) {
-				sb.append("for (int second = 0;; second++) {\n");
-				sb.append(getTimeoutMessage(param1));
-				sb.append("try {\nif (!selenium.isElementPresent(\"");
-				sb.append(param2);
-				sb.append("\"))\n break;\n }\n catch (Exception e) {}\n");
-				sb.append("Thread.sleep(1000);\n");
-				sb.append("}\n");
 			} else if (param1.equals("waitForElementPresent")) {
 				sb.append("for (int second = 0;; second++) {\n");
 				sb.append(getTimeoutMessage(param1));
@@ -320,241 +204,16 @@ sb.append("  driver.close();\n}\n\n");
 				sb.append("\")) \nbreak; }\n catch (Exception e) {}\n");
 				sb.append("Thread.sleep(1000);\n");
 				sb.append("}\n");
-			} else if (param1.equals("waitForTextPresent")) {
-				sb.append("for (int second = 0;; second++) {\n");
-				sb.append(getTimeoutMessage(param1));
-				sb.append("try {\n if (selenium.isTextPresent(\"");
-				sb.append(param2);
-				sb.append("\")) \nbreak; }\n catch (Exception e) {}\n");
-				sb.append("Thread.sleep(1000);\n");
-				sb.append("}\n");
-			} else if (param1.equals("waitForTextNotPresent")) {
-				sb.append("for (int second = 0;; second++) {\n");
-				sb.append(getTimeoutMessage(param1));
-				sb.append("try {\n if (!selenium.isTextPresent(\"");
-				sb.append(param2);
-				sb.append("\")) \nbreak; }\n catch (Exception e) {}\n");
-				sb.append("Thread.sleep(1000);\n");
-				sb.append("}\n");
-			} else if (param1.equals("waitForTable")) {
-				sb.append("for (int second = 0;; second++) {\n");
-				sb.append(getTimeoutMessage(param1));
-				sb.append("try {\n");
-				sb.append("if (\"\".equals(selenium.getTable(\"");
-				sb.append(param2);
-				sb.append("\"))) {\nbreak;\n}\n}\ncatch (Exception e) {\n}\n");
-				sb.append("Thread.sleep(1000);\n");
-				sb.append("}\n");
-			} else if (param1.equals("mouseDownAt") || param1.equals("mouseUpAt")) {
-				sb.append("selenium.");
-				sb.append(param1);
-				sb.append("(\"");
-				sb.append(param2);
-				sb.append("\",\"");
-				sb.append(param3);
-				sb.append("\");\n");
-			} else if (param1.equals("verifyValue")) {
-				sb.append("assertEquals(\"");
-				sb.append(param3);
-				sb.append("\", selenium.getValue(\"");
-				sb.append(param2);
-				sb.append("\"));\n");
-                        } else if (param1.equals("waitForAlert")) {
-				sb.append("waitForAlert(\"");
-				sb.append(param2);
-				sb.append("\");\n");
-			} else if (param1.equals("waitForConfirmation")) {
-				sb.append("for (int second = 0;; second++) {\n");
-				sb.append(getTimeoutMessage(param1));
-				sb.append("try {\n");
-				sb.append("if (selenium.getConfirmation().equals(\"");
-				sb.append(param2);
-				sb.append("\")) {\nbreak;\n}\n}\ncatch (Exception e) {\n}\n");
-				sb.append("Thread.sleep(1000);\n");
-				sb.append("}\n");
-			}else if (param1.equals("waitForConfirmationPresent")) {
-				sb.append("for (int second = 0;; second++) {\n");
-				sb.append(getTimeoutMessage(param1));
-				sb.append("try {\n");
-				sb.append("if (selenium.isConfirmationPresent()");
-				sb.append("){\nbreak;\n}\n}\ncatch (Exception e) {\n}\n");
-				sb.append("Thread.sleep(1000);\n");
-				sb.append("}\n");
-			} else if (param1.equals("verifyEval")) {
-				sb.append("assertEquals(\"");
-				sb.append(param3);
-				sb.append("\", selenium.getEval(\"");
-				sb.append(param2);
-				sb.append("\"));\n");
-			} else if (param1.equals("mouseOver") || param1.equals("mouseOut")) {
-				sb.append("selenium.");
-				sb.append(param1);
-				sb.append("(\"");
-				sb.append(param2);
-				sb.append("\");\n");
-			} else if (param1.equals("assertVisible")) {
-				sb.append("assertTrue(selenium.isVisible");
-				sb.append("(\"");
-				sb.append(param2);
-				sb.append("\"));\n");
-			} else if (param1.equals("verifyVisible")) {
-				sb.append("assertTrue(selenium.isVisible");
-				sb.append("(\"");
-				sb.append(param2);
-				sb.append("\"));\n");
-			} else if (param1.equals("verifyChecked")) {
-				sb.append("verifyTrue(selenium.isChecked");
-				sb.append("(\"");
-				sb.append(param2);
-				sb.append("\"));\n");
-			//-----------------add by linh_vu------------
-                        } else if (param1.equals("waitForNotVisible")) {
-				sb.append("for (int second = 0;; second++) {\n");
-				sb.append(getTimeoutMessage(param1));
-				sb.append("try {\nif (!selenium.isVisible(\"");
-				sb.append(param2);
-				sb.append("\"))\n break;\n }\n catch (Exception e) {}\n");
-				sb.append("Thread.sleep(1000);\n");
-				sb.append("}\n");
-                        } else if (param1.equals("verifySelectedValue")) {
-				sb.append("assertTrue");
-				sb.append("(selenium.getSelectedValue(\"");
-				sb.append(param2);
-				sb.append("\").equals(\"");
-				sb.append(param3);
-				sb.append("\"));\n");
-                        } else if (param1.equals("verifyNotVisible")) {
-				sb.append("assertFalse(selenium.isVisible");
-				sb.append("(\"");
-				sb.append(param2);
-				sb.append("\"));\n");
-                        } else if (param1.equals("waitForVisible")) {
-				sb.append("for (int second = 0;; second++) {\n");
-				sb.append(getTimeoutMessage(param1));
-				sb.append("try {\nif (selenium.isVisible(\"");
-				sb.append(param2);
-				sb.append("\"))\n break;\n }\n catch (Exception e) {}\n");
-				sb.append("Thread.sleep(1000);\n");
-				sb.append("}\n");
-			} else if (param1.equals("waitForChecked")) {
-				sb.append("for (int second = 0;; second++) {\n");
-				sb.append(getTimeoutMessage(param1));
-				sb.append("try {\nif (selenium.isChecked(\"");
-				sb.append(param2);
-				sb.append("\"))\n break;\n }\n catch (Exception e) {}\n");
-				sb.append("Thread.sleep(1000);\n");
-				sb.append("}\n");
-			} else if (param1.equals("waitForNotChecked")) {
-				sb.append("for (int second = 0;; second++) {\n");
-				sb.append(getTimeoutMessage(param1));
-				sb.append("try {\nif (!selenium.isChecked(\"");
-				sb.append(param2);
-				sb.append("\"))\n break;\n }\n catch (Exception e) {}\n");
-				sb.append("Thread.sleep(1000);\n");
-				sb.append("}\n");
-			} else if (param1.equals("waitForLocation")) {
-				sb.append("for (int second = 0;; second++) {\n");
-				sb.append(getTimeoutMessage(param1));
-				sb.append("try {\n");
-				sb.append("if (selenium.getLocation().equals(\"");
-				sb.append(param2);
-				sb.append("\")) {\nbreak;\n}\n}\ncatch (Exception e) {\n}\n");
-				sb.append("Thread.sleep(1000);\n");
-				sb.append("}\n");
-			} else if (param1.equals("waitForSelectedValue")) {
-				sb.append("assertTrue(selenium.getSelectedValue(\"");
-				sb.append(param2);
-				sb.append("\").matches(\"^");
-				sb.append(param3);
-				sb.append("$\"));\n");
-			} else if (param1.equals("waitForAttribute")) {
-				sb.append("assertTrue(selenium.getAttribute(\"");
-				sb.append(param2);
-				sb.append("\").matches(\"^");
-				sb.append(param3);
-				sb.append("$\"));\n");
-			} else if (param1.equals("doubleClickAt")) {
-				sb.append("selenium.");
-				sb.append(param1);
-				sb.append("(\"");
-				sb.append(param2);
-				sb.append("\", \"1,1\");\n");
-			} else if (param1.equals("verifySelectedLabel")) {
-				sb.append("assertTrue");
-				sb.append("(selenium.getSelectedLabel(\"");
-				sb.append(param2);
-				sb.append("\").equals(\"");
-				sb.append(param3);
-				sb.append("\"));\n");
-			} else if (param1.equals("storeEval")) {
-				sb.append("String ").append(param3).append(" = selenium.getEval(\"").append(param2).append("\").toString();\n");
-			} else if (param1.equals("keyDown")) {
-				sb.append("selenium.");
-				sb.append(param1);
-				sb.append("(\"");
-				sb.append(param2);
-				sb.append("\", \"");
-				sb.append(param3);
-				sb.append("\");\n");
-			} else if (param1.equals("verifyAttribute")) {
-				sb.append("assertTrue");
-				sb.append("(selenium.getAttribute(\"");
-				sb.append(param2);
-				sb.append("\").equals(\"");
-				sb.append(param3);
-				sb.append("\"));\n");
-			//-----------------------------	
-			} else if (param1.equals("assertNotVisible")) {
-				sb.append("assertFalse(selenium.isVisible");
-				sb.append("(\"");
-				sb.append(param2);
-				sb.append("\"));\n");
-			} else if (param1.equals("waitForNotSpeed")) {
-				sb.append("selenium.waitForNotSpeed(\"");
-				sb.append(param2);
-				sb.append("\");\n");
-			}  else if (param1.equals("waitForSpeed")) {
-				sb.append("selenium.waitForSpeed(\"");
-				sb.append(param2);
-				sb.append("\");\n");			
-                        } else if (param1.equals("assertValue")) {
-				sb.append("assertEquals(\"");
-				sb.append(param3);
-				sb.append("\", selenium.getValue(\"");
-				sb.append(param2);
-				sb.append("\"));\n");
-			} else if (param1.equals("setSpeed")) {
-				sb.append("selenium.setSpeed(\"").append(param2).append("\");\n");
-			} else if (param1.equals("chooseOkOnNextConfirmation")) {
-				sb.append("selenium.chooseOkOnNextConfirmation();\n");
-			} else if (param1.equals("storeConfirmation")) {
-				sb.append("String ").append(param2).append(" = selenium.getConfirmation();\n");
-			} else if (param1.equals("keyPress")) {
-				sb.append("selenium.keyPress(\"").append(param2).append("\",\"").append(param3).append("\");\n");
-			} else if (param1.equals("check")) {
-				sb.append("selenium.check(\"").append(param2).append("\");\n");
 			} else if (param1.equals("uncheck")) {
 				sb.append("selenium.uncheck(\"").append(param2).append("\");\n");
-			} else if (param1.equals("verifyNotChecked")) {
-				sb.append("verifyFalse(selenium.isChecked(\"").append(param2).append("\"));\n");
-			} else if (param1.equals("deleteCookie")) {
-				sb.append("selenium.deleteCookie(\"").append(param2).append("\",\"").append(param3).append("\");\n");
-			} else if (param1.equals("windowMaximize")) {
-				sb.append("selenium.windowMaximize()").append(";\n");
-
-			} else if (param1.equals("waitForText")) {
-				sb.append("for (int second = 0;; second++) {\n");
-				sb.append(getTimeoutMessage(param1));
-				sb.append("try {\nif (selenium.isElementPresent(\"");
+			} else if (param1.equals("check")) {
+				sb.append("selenium.check(\"").append(param2).append("\");\n");
+			} else if (param1.equals("verifyChecked")) {
+				sb.append("assertTrue(selenium.isChecked");
+				sb.append("(\"");
 				sb.append(param2);
-				sb.append("\"))\n break;\n }\n catch (Exception e) {}\n");
-				sb.append("Thread.sleep(1000);\n");
-				sb.append("}\n");
-			} else if (param1.equals("refresh")) {
-				sb.append("selenium.refresh();\n");
-			 
-			//-----------------add by linh_vu------------
-			} else if (param1.equals("keyDown")) {
+				sb.append("\"));\n");
+                        } else if ( param1.equals("type")) {
 				sb.append("selenium.");
 				sb.append(param1);
 				sb.append("(\"");
@@ -562,78 +221,6 @@ sb.append("  driver.close();\n}\n\n");
 				sb.append("\", \"");
 				sb.append(param3);
 				sb.append("\");\n");
-			} else if (param1.equals("keyUp")) {
-				sb.append("selenium.");
-				sb.append(param1);
-				sb.append("(\"");
-				sb.append(param2);
-				sb.append("\", \"");
-				sb.append(param3);
-				sb.append("\");\n");
-			} else if (param1.equals("storeValue")) {
-				sb.append("String ");
-				sb.append(param3);
-				sb.append(" = selenium.getValue(\"");
-				sb.append(param2);
-				sb.append("\");\n");
-				sb.append("RuntimeVariables.setValue(\"");
-				sb.append(param3);
-				sb.append("\", ");
-				sb.append(param3);
-				sb.append(");\n");
-                        } else if (param1.equals("verifyLocation")) {
-				sb.append("assertEquals(\"");
-              			sb.append(param2);
-				sb.append("\", selenium.getLocation());\n");
-
-                        } else if (param1.equals("TypeRandom")) {
-				sb.append("selenium.getEval(\"selenium.doTypeRandom(\\\"");
-                                sb.append(param2);
-				sb.append("\\\",\\\"");
-                                sb.append(param3);
-				sb.append("\\\"));\n");
-		        //-------------------------------------
-			
-			} else if (param1.equals("refreshAndWait")) {
-				sb.append("selenium.refresh();\n");
-				sb.append("selenium.waitForPageToLoad(timeout);\n");
-			} else if (param1.equals("storeXpathCount")) {
-				sb.append("String ").append(param3).append(" = selenium.getXpathCount(\"").append(param2).append(
-				      "\").toString();\n");
-			} else if (param1.equals("verifyOrdered")) {
-				sb.append("selenium.isOrdered(\"").append(param2).append("\",\"").append(param3).append("\");\n"); 
-			} else if (param1.equals("dragAndDropToObject")) {
-				sb.append("selenium.dragAndDropToObject(\"").append(param2).append("\",\"").append(param3).append("\");\n");
-			} else if (param1.equals("componentExoContextMenu")) {
-				sb.append("selenium.getEval(\"selenium.doComponentExoContextMenu(\\\"").append(param2)
-				      .append("\\\")\");\n");
-			} else if (param1.equals("componentExoContextMenuAndWait")) {
-				sb.append("selenium.doComponentExoContextMenu(\"");
-				sb.append(param2);
-				sb.append("\");\n");
-				sb.append("selenium.waitForPageToLoad(timeout);\n");
-			} else if (param1.equals("getExoExtensionVersion")) {
-				sb.append("selenium.getEval(\"selenium.doGetExoExtensionVersion(\\\"").append(param2).append("\\\")\");\n");
-			} else if (param1.equals("componentExoDoubleClick")) {
-				sb.append("selenium.getEval(\"selenium.doComponentExoDoubleClick(\\\"").append(param2).append("\\\")\");\n");
-			} else if (param1.equals("checkAndWait")) {
-				sb.append("selenium.check(\"");
-				sb.append(param2);
-				sb.append("\");\n");
-				sb.append("selenium.waitForPageToLoad(timeout);\n");
-			} else if (param1.equals("storeAttribute")) {
-				sb.append("String ").append(param3).append(" = ").append("selenium.getAttribute(\"").append(param2).append("\");\n");
-			} else if (param1.equals("storeElementPositionTop")) {
-				sb.append("String ").append(param3).append(" = ").append("selenium.getElementPositionTop(\"").append(param2).append("\");\n");
-			} else if (param1.equals("verifyElementPositionTop")) {
-				sb.append("verifyEquals(").append("\"").append(param3).append("\", ").append("selenium.getElementPositionTop(\"").append(param2).append("\"));\n");
-			} else if (param1.equals("echo")) {
-				sb.append("System.out.println(\"" + param2 + "\");\n");
-			} else if (param1.length() > 0) {
-				String message = param1 + " was not translated \"" + param2 + "\"";
-				System.err.println("[ERROR] " + message);
-				sb.append("// NOT GENERATED " + message);
-				throw new RuntimeException("Selenium function not implemented : " + message);
 			}
 		}
 		sb.append("}\n\n");
