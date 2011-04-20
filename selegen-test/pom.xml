@@ -14,7 +14,7 @@
   <description>Automated UI tests for selegen.test</description>
 
   <properties>
-    <org.selenium.server.version>1.0.1</org.selenium.server.version>
+    <org.selenium.server.version>2.0b2</org.selenium.server.version>
     <org.selenium.maven-plugin.version>1.0.1</org.selenium.maven-plugin.version>
 
     <!-- configuration values for Selegen -->
