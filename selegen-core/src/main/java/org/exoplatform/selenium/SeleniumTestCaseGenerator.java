@@ -67,17 +67,20 @@ public class SeleniumTestCaseGenerator {
 
 		// Write each Test in one file
 		StringBuffer sb = new StringBuffer();
-		sb.append("package " + testPackagePath + ";\n\n");
-		// sb.append("import org.exoplatform.util.selenium.BaseTestCase;\n");
-		sb.append("import com.thoughtworks.selenium.Selenium;\n");
-		sb.append("import org.openqa.selenium.*;\n");
-		sb.append("import org.openqa.selenium.firefox.*;\n");
-		sb.append("import org.openqa.selenium.support.ui.Wait;\n");
-		sb.append("import org.openqa.selenium.support.ui.WebDriverWait;\n");
-		sb.append("import org.junit.*;\n");
-                sb.append("import static org.junit.Assert.*;\n\n");
-	
-		sb.append("public class " + testName + " {\n\n");
+
+sb.append("package " + testPackagePath + ";\n\n");
+sb.append("import static org.junit.Assert.*;\n\n");
+sb.append("import org.openqa.selenium.htmlunit.*;\n");
+sb.append("import org.openqa.selenium.firefox.*;\n");
+sb.append("import org.openqa.selenium.chrome.*;\n");
+sb.append("import org.openqa.selenium.ie.*; \n\n");
+
+sb.append("import com.thoughtworks.selenium.Selenium;\n");
+sb.append("import org.openqa.selenium.*;\n");
+sb.append("import org.junit.*;\n\n");
+
+
+sb.append("public class " + testName + " {\n\n");
 
 
 		// setSpeed & setUp
@@ -95,34 +98,22 @@ public class SeleniumTestCaseGenerator {
 
 	private void appendCommonMethods(StringBuffer sb) {
                 sb.append("WebDriver driver;\n");
-		sb.append("Selenium selenium;\n");
-                //sb.append("Wait<WebDriver> wait;\n\n");
-		sb.append("public String speed = \"100\";\n");
+		sb.append("Selenium selenium;\n\n");
+
 		sb.append("public String timeout = \"30000\";\n");
-		sb.append("public int timeoutSecInt = 30;\n");
-		sb.append("public String browser = \"firefox\";\n");
-                sb.append("public String host = \"localhost\";\n");
-                sb.append("public String hostPort = \"8080\";\n\n");	
-		sb.append("public void setSpeed() {\n  selenium.setSpeed(speed);\n}\n\n");
+		sb.append("public int timeoutSecInt = 30;\n\n");
 
-sb.append("public void startSelenium() {\n");
-sb.append("  driver = new FirefoxDriver();\n");
-                //sb.append("  wait = new WebDriverWait(driver, 30);\n");
-        	/*sb.append("  browser = System.getProperty(\"selenium.browser\", browser);\n");
-		//sb.append("  timeout = System.getProperty(\"selenium.timeout\", timeout);\n");
-		//sb.append("  timeoutSecInt = Integer.parseInt(timeout)/1000;\n");		
-		//sb.append("  speed = System.getProperty(\"selenium.speed\", speed);\n");
-                //sb.append("  host = System.getProperty(\"selenium.host\", host);\n");
-                //sb.append("  hostPort = System.getProperty(\"selenium.host.port\", hostPort);\n\n");*/
+//sb.append("public void setSpeed() {\n  selenium.setSpeed(speed);\n}\n\n");
 
+sb.append("@Before\n");
+sb.append(" public void startSelenium() {\n");
+	sb.append("  driver = new FirefoxDriver();\n");
+	sb.append(" selenium = new WebDriverBackedSelenium(driver, \"http://192.168.3.7:18180\");\n");
+	sb.append("}\n\n");
 
-		//selenium = new WebDriverBackedSelenium(driver, "http://localhost:8080");
-
-sb.append(" selenium = new WebDriverBackedSelenium(driver, \"http://192.168.3.7:18180\");\n");
-sb.append("}\n\n");
-
+sb.append("@After\n");
 sb.append("  public void stopSelenium() {\n");
-sb.append("  driver.close();\n}\n\n");
+	sb.append("  driver.close();\n}\n\n");
 	}
 
 	private void appendTest(StringBuffer sb, String scriptFile, String testName, String testMethodName) throws Exception {
@@ -132,8 +123,9 @@ sb.append("  driver.close();\n}\n\n");
 		System.out.println("* " + basedir + "/" + scriptFile);
 
 		// Method
+sb.append("@Test\n");
 		sb.append("public void " + testMethodName + "() throws InterruptedException {\n");
-		sb.append("  setSpeed();\n");
+		//sb.append("  setSpeed();\n");
 
 		if ((xml.indexOf("<title>" + testName + "</title>") == -1)
 		      || (xml.indexOf("colspan=\"3\">" + testName + "</td>") == -1)) {
@@ -231,6 +223,10 @@ sb.append("  driver.close();\n}\n\n");
 				sb.append("\", \"");
 				sb.append(param3);
 				sb.append("\");\n");
+			}else if (param1.equals("windowMaximize")) {
+				sb.append("selenium.windowMaximize()").append(";\n");
+			}else if (param1.equals("echo")) {
+				sb.append("System.out.println(\"" + param2 + "\");\n");
 			}
 		}
 		sb.append("}\n\n");
