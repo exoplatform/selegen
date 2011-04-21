@@ -69,13 +69,7 @@
       <version>${org.selenium.server.version}</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.seleniumhq.selenium.server</groupId>
-      <artifactId>selenium-server</artifactId>
-      <version>${org.selenium.server.version}</version>
-    </dependency>
-  </dependencies>
-
+    
   <profiles>
     <profile>
       <id>selenium</id>
