@@ -14,7 +14,8 @@
   <description>Automated UI tests for selegen.test</description>
 
   <properties>
-    <org.selenium.server.version>2.0b2</org.selenium.server.version>
+    <org.selenium.server.version>1.0.1</org.selenium.server.version>
+    <org.seleniumhq.selenium.server.version>2.0b2</org.seleniumhq.selenium.server.version>
     <org.selenium.maven-plugin.version>1.0.1</org.selenium.maven-plugin.version>
 
     <!-- configuration values for Selegen -->
@@ -27,6 +28,25 @@
   </properties>
 
   <dependencies>
+
+   <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-firefox-driver</artifactId>
+      <version>${org.seleniumhq.selenium.server.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-server</artifactId>
+      <version>${org.seleniumhq.selenium.server.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.seleniumhq.webdriver</groupId>
+      <artifactId>webdriver-selenium</artifactId>
+      <version>0.9.7089</version>
+    </dependency>
+
 
     <dependency>
       <groupId>org.exoplatform.utils.selegen</groupId>

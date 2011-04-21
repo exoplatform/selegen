@@ -102,13 +102,22 @@ sb.append("public class " + testName + " {\n\n");
 
 		sb.append("public String timeout = \"30000\";\n");
 		sb.append("public int timeoutSecInt = 30;\n\n");
-
+                sb.append("public String host = \"localhost\";\n");
+                sb.append("public String hostPort = \"8080\";\n");
+                sb.append("public String speed = \"100\";\n");
 //sb.append("public void setSpeed() {\n  selenium.setSpeed(speed);\n}\n\n");
 
 sb.append("@Before\n");
 sb.append(" public void startSelenium() {\n");
+
+		sb.append("  timeout = System.getProperty(\"selenium.timeout\", timeout);\n");
+		sb.append("  timeoutSecInt = Integer.parseInt(timeout)/1000;\n");		
+		sb.append("  speed = System.getProperty(\"selenium.speed\", speed);\n");
+        sb.append("  host = System.getProperty(\"selenium.host\", host);\n");
+        sb.append("  hostPort = System.getProperty(\"selenium.host.port\", hostPort);\n");
 	sb.append("  driver = new FirefoxDriver();\n");
-	sb.append(" selenium = new WebDriverBackedSelenium(driver, \"http://192.168.3.7:18180\");\n");
+	sb.append("  selenium = new WebDriverBackedSelenium(driver, \"http://\" + host + \":\" + hostPort + \"/portal/\");\n");
+
 	sb.append("}\n\n");
 
 sb.append("@After\n");
