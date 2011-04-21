@@ -116,7 +116,7 @@ sb.append(" public void startSelenium() {\n");
         sb.append("  host = System.getProperty(\"selenium.host\", host);\n");
         sb.append("  hostPort = System.getProperty(\"selenium.host.port\", hostPort);\n");
 	sb.append("  driver = new FirefoxDriver();\n");
-	sb.append("  selenium = new WebDriverBackedSelenium(driver, \"http://\" + host + \":\" + hostPort + \"/portal/\");\n");
+	sb.append("  selenium = new WebDriverBackedSelenium(driver, \"http://\" + host + \":\" + hostPort + ");\n");
 
 	sb.append("}\n\n");
 
