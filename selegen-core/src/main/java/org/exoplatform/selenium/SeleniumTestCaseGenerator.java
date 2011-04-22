@@ -207,15 +207,7 @@ sb.append("@Test\n");
 				sb.append(param2);
 				sb.append("\");\n");
                                 //sb.append("selenium.waitForPageToLoad(timeout);\n");
-			} else if (param1.equals("waitForElementPresent")) {
-				sb.append("for (int second = 0;; second++) {\n");
-				sb.append(getTimeoutMessage(param1));
-				sb.append("try {\n if (selenium.isElementPresent(\"");
-				sb.append(param2);
-				sb.append("\")) \nbreak; }\n catch (Exception e) {}\n");
-				sb.append("Thread.sleep(1000);\n");
-				sb.append("}\n");
-			} else if (param1.equals("uncheck")) {
+			}else if (param1.equals("uncheck")) {
 				sb.append("selenium.uncheck(\"").append(param2).append("\");\n");
 			} else if (param1.equals("check")) {
 				sb.append("selenium.check(\"").append(param2).append("\");\n");
