@@ -7,213 +7,27 @@
     <version>2.0.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>selegen-test</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
+  <artifactId>selegen-core</artifactId>
   <packaging>jar</packaging>
-  <name>Selenium Sniff Test for selegen.test</name>
-  <description>Automated UI tests for selegen.test</description>
-
-  <properties>
-    <org.selenium.server.version>1.0.1</org.selenium.server.version>
-    <org.seleniumhq.selenium.server.version>2.0b2</org.seleniumhq.selenium.server.version>
-    <org.selenium.maven-plugin.version>1.0.1</org.selenium.maven-plugin.version>
-
-    <!-- configuration values for Selegen -->
-    <selenium.port>8444</selenium.port><!-- 4444 (selenium RC default) is used by JBoss -->
-    <selenium.browser>firefox</selenium.browser>
-    <selenium.timeout>30000</selenium.timeout>
-    <selenium.speed>300</selenium.speed>
-    <selenium.host>localhost</selenium.host>
-    <selenium.host.port>8080</selenium.host.port>
-  </properties>
+  <name>Selenium Java Generator</name>
 
   <dependencies>
-
-   <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-firefox-driver</artifactId>
-      <version>${org.seleniumhq.selenium.server.version}</version>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.0</version>
     </dependency>
 
     <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-server</artifactId>
-      <version>${org.seleniumhq.selenium.server.version}</version>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>1.4</version>
     </dependency>
-
     <dependency>
-      <groupId>org.seleniumhq.webdriver</groupId>
-      <artifactId>webdriver-selenium</artifactId>
-      <version>0.9.7089</version>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.4</version>
     </dependency>
-
-
-    <dependency>
-      <groupId>org.exoplatform.utils.selegen</groupId>
-      <artifactId>selegen-core</artifactId>
-      <version>2.0.0-SNAPSHOT</version>
-    </dependency>
-
-    <!-- eXo User Extensions -->
-    <dependency>
-      <groupId>org.exoplatform.utils.selegen</groupId>
-      <artifactId>user-extension</artifactId>
-      <version>2.0.0-SNAPSHOT</version>
-      <type>js</type>
-    </dependency>
-
-    <!-- external deps -->
-    <dependency>
-      <groupId>org.seleniumhq.selenium.client-drivers</groupId>
-      <artifactId>selenium-java-client-driver</artifactId>
-      <version>${org.selenium.server.version}</version>
-    </dependency>
-
-    
-  <profiles>
-    <profile>
-      <id>selenium</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>add-test-source</id>
-                <phase>generate-sources</phase>
-                <goals>
-                  <goal>add-test-source</goal>
-                </goals>
-                <configuration>
-                  <sources>
-                    <source>${project.build.directory}/generated/test</source>
-                  </sources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          
-          <!-- get the user-extension attached with selegen -->
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <executions>
-          <execution>
-            <id>copy-dependencies</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>copy-dependencies</goal>
-            </goals>
-            <configuration>
-              <includeTypes>js</includeTypes>
-              <stripVersion>true</stripVersion>
-              <outputDirectory>${project.build.directory}/selenium</outputDirectory>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <phase>generate-test-sources</phase>
-                <goals>
-                  <goal>java</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <mainClass>org.exoplatform.selenium.SeleniumTestCaseGenerator</mainClass>
-              <arguments>
-                <argument>${project.basedir}/src/suite</argument>
-                <argument>${project.build.directory}/generated/test</argument>
-              </arguments>
-            </configuration>
-          </plugin>
-          
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>selenium-maven-plugin</artifactId>
-            <version>${org.selenium.maven-plugin.version}</version>
-            <executions>
-              <execution>
-                <phase>pre-integration-test</phase>
-                <goals>
-                  <goal>start-server</goal>
-                </goals>
-                <configuration>
-                  <background>true</background>
-                  <logFile>${project.build.directory}/server.log</logFile>
-                  <logOutput>true</logOutput>
-                  <userExtensions>${project.build.directory}/selenium/user-extension.js</userExtensions>
-                  <port>${selenium.port}</port>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <executions>
-              <execution>
-                <phase>integration-test</phase>
-                <goals>
-                  <goal>test</goal>
-                </goals>
-                <configuration>
-                  <skip>false</skip>
-                  <includes><include>**/selenium/Test_*.java</include></includes>
-                  <systemProperties>
-                    <property>
-                      <name>selenium.port</name>
-                      <value>${selenium.port}</value>
-                    </property>
-                    <property>
-                      <name>selenium.host</name>
-                      <value>${selenium.host}</value>
-                    </property>
-                    <property>
-                      <name>selenium.host.port</name>
-                      <value>${selenium.host.port}</value>
-                    </property>
-                    <property>
-                      <name>selenium.browser</name>
-                      <value>${selenium.browser}</value>
-                    </property>
-                    <property>
-                      <name>selenium.speed</name>
-                      <value>${selenium.speed}</value>
-                    </property>
-                    <property>
-                      <name>selenium.timeout</name>
-                      <value>${selenium.timeout}</value>
-                    </property>
-                  </systemProperties>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-
-         </plugins>
-      </build>
-
-     </profile>
-  </profiles>
-
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+  </dependencies>
 
 </project>
