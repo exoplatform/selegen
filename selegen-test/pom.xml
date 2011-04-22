@@ -7,7 +7,7 @@
     <version>2.0.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>selegen-core</artifactId>
+  <artifactId>selegen-test</artifactId>
   <packaging>jar</packaging>
   <name>Selenium Java Generator</name>
 
