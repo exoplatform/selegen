@@ -70,6 +70,8 @@ public class SeleniumTestCaseGenerator {
 		sb.append("package " + testPackagePath + ";\n\n");
 		// sb.append("import org.exoplatform.util.selenium.BaseTestCase;\n");
 		sb.append("import junit.framework.TestCase;\n");
+                sb.append("import java.io.File;\n");
+
 		sb.append("import com.thoughtworks.selenium.*;\n");
 		sb.append("public class " + testName + " extends SeleneseTestCase {\n");
 
@@ -91,16 +93,16 @@ public class SeleniumTestCaseGenerator {
 		sb.append("public String timeout = \"30000\";\n");
 		sb.append("public int timeoutSecInt = 30;\n");
 		sb.append("public String browser = \"firefox\";\n");
-        sb.append("public String host = \"localhost\";\n");
-        sb.append("public String hostPort = \"8080\";\n");		
+                sb.append("public String host = \"localhost\";\n");
+                sb.append("public String hostPort = \"8080\";\n");		
 		sb.append("public void setSpeed() {\n  selenium.setSpeed(speed);\n}\n\n");
 		sb.append("public void setUp() throws Exception {\n");
 		sb.append("  browser = System.getProperty(\"selenium.browser\", browser);\n");
 		sb.append("  timeout = System.getProperty(\"selenium.timeout\", timeout);\n");
 		sb.append("  timeoutSecInt = Integer.parseInt(timeout)/1000;\n");		
 		sb.append("  speed = System.getProperty(\"selenium.speed\", speed);\n");
-        sb.append("  host = System.getProperty(\"selenium.host\", host);\n");
-        sb.append("  hostPort = System.getProperty(\"selenium.host.port\", hostPort);\n");
+                sb.append("  host = System.getProperty(\"selenium.host\", host);\n");
+                sb.append("  hostPort = System.getProperty(\"selenium.host.port\", hostPort);\n");
 		sb.append("  super.setUp(\"http://\" + host + \":\" + hostPort + \"/portal/\", \"*\" + browser);\n");
 		sb.append("}\n\n");
 	}
@@ -467,7 +469,9 @@ public class SeleniumTestCaseGenerator {
 				sb.append("\"));\n");
 			} else if (param1.equals("storeEval")) {
 				sb.append("String ").append(param3).append(" = selenium.getEval(\"").append(param2).append("\").toString();\n");
-			} else if (param1.equals("keyDown")) {
+			} else if (param1.equals("store")) {
+				sb.append("String ").append(param3).append(" = ").append(param2).append(";\n");
+			}else if (param1.equals("keyDown")) {
 				sb.append("selenium.");
 				sb.append(param1);
 				sb.append("(\"");
@@ -533,6 +537,14 @@ public class SeleniumTestCaseGenerator {
 				sb.append("selenium.refresh();\n");
 			 
 			//-----------------add by linh_vu------------
+
+			} else if (param1.equals("CreateFolderReport")) {
+				sb.append("String pathDirReport = \"/home/linh_vu/DailyReport/\" + ");
+				sb.append(param2);
+				sb.append(" + \"/rev\" + ");
+                                sb.append(param3);
+                                sb.append("; \n");
+				sb.append("new File(pathDirReport).mkdirs();\n");
 			} else if (param1.equals("keyDown")) {
 				sb.append("selenium.");
 				sb.append(param1);
