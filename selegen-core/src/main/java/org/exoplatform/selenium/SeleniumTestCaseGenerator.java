@@ -388,7 +388,6 @@ public class SeleniumTestCaseGenerator {
 				sb.append("(\"");
 				sb.append(param2);
 				sb.append("\"));\n");
-			//-----------------add by linh_vu------------
                         } else if (param1.equals("waitForNotVisible")) {
 				sb.append("for (int second = 0;; second++) {\n");
 				sb.append(getTimeoutMessage(param1));
@@ -486,7 +485,6 @@ public class SeleniumTestCaseGenerator {
 				sb.append("\").equals(\"");
 				sb.append(param3);
 				sb.append("\"));\n");
-			//-----------------------------	
 			} else if (param1.equals("assertNotVisible")) {
 				sb.append("TestCase.assertFalse(selenium.isVisible");
 				sb.append("(\"");
@@ -524,7 +522,6 @@ public class SeleniumTestCaseGenerator {
 				sb.append("selenium.deleteCookie(\"").append(param2).append("\",\"").append(param3).append("\");\n");
 			} else if (param1.equals("windowMaximize")) {
 				sb.append("selenium.windowMaximize()").append(";\n");
-
 			} else if (param1.equals("waitForText")) {
 				sb.append("for (int second = 0;; second++) {\n");
 				sb.append(getTimeoutMessage(param1));
@@ -536,15 +533,19 @@ public class SeleniumTestCaseGenerator {
 			} else if (param1.equals("refresh")) {
 				sb.append("selenium.refresh();\n");
 			 
-			//-----------------add by linh_vu------------
-
-			} else if (param1.equals("CreateFolderReport")) {
-				sb.append("String pathDirReport = \"/home/linh_vu/DailyReport/\" + ");
+			//------------------User extension----------------
+			/**
+        		 * CreateFolderbyTime will create a Folder on Linux by time with current date and newest Rev : revXXXXX/YYYYMMDD/
+			 * Account use to create Folder is root
+			 */
+			} else if (param1.equals("CreateFolderbyTime")) {
+				sb.append("String pathDirReport = \"/DailyReport/\" + ");
 				sb.append(param2);
 				sb.append(" + \"/rev\" + ");
                                 sb.append(param3);
                                 sb.append("; \n");
 				sb.append("new File(pathDirReport).mkdirs();\n");
+		        //---------------------------------end-----------
 			} else if (param1.equals("keyDown")) {
 				sb.append("selenium.");
 				sb.append(param1);
@@ -583,8 +584,6 @@ public class SeleniumTestCaseGenerator {
 				sb.append("\\\",\\\"");
                                 sb.append(param3);
 				sb.append("\\\"));\n");
-		        //-------------------------------------
-			
 			} else if (param1.equals("refreshAndWait")) {
 				sb.append("selenium.refresh();\n");
 				sb.append("selenium.waitForPageToLoad(timeout);\n");
@@ -595,6 +594,8 @@ public class SeleniumTestCaseGenerator {
 				sb.append("selenium.isOrdered(\"").append(param2).append("\",\"").append(param3).append("\");\n"); 
 			} else if (param1.equals("dragAndDropToObject")) {
 				sb.append("selenium.dragAndDropToObject(\"").append(param2).append("\",\"").append(param3).append("\");\n");
+
+
 			} else if (param1.equals("componentExoContextMenu")) {
 				sb.append("selenium.getEval(\"selenium.doComponentExoContextMenu(\\\"").append(param2)
 				      .append("\\\")\");\n");
