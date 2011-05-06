@@ -538,7 +538,7 @@ public class SeleniumTestCaseGenerator {
         		 * CreateFolderbyTime will create a Folder on Linux by time with current date and newest Rev : revXXXXX/YYYYMMDD/
 			 * Account use to create Folder is root
 			 */
-			} else if (param1.equals("CreateFolderbyTime")) {
+			} else if (param1.equals("CreateFolderReport")) {
 				sb.append("String pathDirReport = \"/DailyReport/\" + ");
 				sb.append(param2);
 				sb.append(" + \"/rev\" + ");
