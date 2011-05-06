@@ -469,8 +469,8 @@ public class SeleniumTestCaseGenerator {
 			} else if (param1.equals("storeEval")) {
 				sb.append("String ").append(param3).append(" = selenium.getEval(\"").append(param2).append("\").toString();\n");
 			} else if (param1.equals("store")) {
-				sb.append("String ").append(param3).append(" = (\"\"").append(param2).append("\"\").toString();\n");
-			}else if (param1.equals("keyDown")) {
+				sb.append("String ").append(param3).append(" = (\"\" + ").append(param2).append(" + \"\").toString();\n");
+			} else if (param1.equals("keyDown")) {
 				sb.append("selenium.");
 				sb.append(param1);
 				sb.append("(\"");
