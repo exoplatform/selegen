@@ -70,6 +70,9 @@ public class SeleniumTestCaseGenerator {
 		sb.append("package " + testPackagePath + ";\n\n");
 		// sb.append("import org.exoplatform.util.selenium.BaseTestCase;\n");
 		sb.append("import junit.framework.TestCase;\n");
+                sb.append("import java.io.File;\n");
+                sb.append("import org.apache.commons.io.FileUtils;\n");
+
 		sb.append("import com.thoughtworks.selenium.*;\n");
 		sb.append("public class " + testName + " extends SeleneseTestCase {\n");
 
@@ -91,16 +94,16 @@ public class SeleniumTestCaseGenerator {
 		sb.append("public String timeout = \"30000\";\n");
 		sb.append("public int timeoutSecInt = 30;\n");
 		sb.append("public String browser = \"firefox\";\n");
-        sb.append("public String host = \"localhost\";\n");
-        sb.append("public String hostPort = \"8080\";\n");		
+                sb.append("public String host = \"localhost\";\n");
+                sb.append("public String hostPort = \"8080\";\n");		
 		sb.append("public void setSpeed() {\n  selenium.setSpeed(speed);\n}\n\n");
 		sb.append("public void setUp() throws Exception {\n");
 		sb.append("  browser = System.getProperty(\"selenium.browser\", browser);\n");
 		sb.append("  timeout = System.getProperty(\"selenium.timeout\", timeout);\n");
 		sb.append("  timeoutSecInt = Integer.parseInt(timeout)/1000;\n");		
 		sb.append("  speed = System.getProperty(\"selenium.speed\", speed);\n");
-        sb.append("  host = System.getProperty(\"selenium.host\", host);\n");
-        sb.append("  hostPort = System.getProperty(\"selenium.host.port\", hostPort);\n");
+                sb.append("  host = System.getProperty(\"selenium.host\", host);\n");
+                sb.append("  hostPort = System.getProperty(\"selenium.host.port\", hostPort);\n");
 		sb.append("  super.setUp(\"http://\" + host + \":\" + hostPort + \"/portal/\", \"*\" + browser);\n");
 		sb.append("}\n\n");
 	}
@@ -178,7 +181,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("\").matches(\"^");
 				sb.append(param3);
 				sb.append("$\"));\n");
-			} else if (param1.equals("assertElementPresent") || param1.equals("assertElementNotPresent")) {
+			}else if (param1.equals("assertElementPresent") || param1.equals("assertElementNotPresent")) {
 				if (param1.equals("assertElementPresent")) {
 					sb.append("TestCase.assertTrue");
 				} else if (param1.equals("assertElementNotPresent")) {
@@ -243,7 +246,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append(param3);
 				sb.append("\");\n");
 				sb.append("selenium.waitForPageToLoad(timeout);\n");
-			} else if (param1.equals("storeText")) {
+			} else if (param1.equals("storeTexttmp")) {
 				sb.append("String ");
 				sb.append(param3);
 				sb.append(" = selenium.getText(\"");
@@ -377,7 +380,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append(param2);
 				sb.append("\"));\n");
 			} else if (param1.equals("verifyVisible")) {
-				sb.append("TestCase.assertTrue(selenium.isVisible");
+			sb.append("TestCase.assertTrue(selenium.isVisible");
 				sb.append("(\"");
 				sb.append(param2);
 				sb.append("\"));\n");
@@ -386,7 +389,6 @@ public class SeleniumTestCaseGenerator {
 				sb.append("(\"");
 				sb.append(param2);
 				sb.append("\"));\n");
-			//-----------------add by linh_vu------------
                         } else if (param1.equals("waitForNotVisible")) {
 				sb.append("for (int second = 0;; second++) {\n");
 				sb.append(getTimeoutMessage(param1));
@@ -467,6 +469,8 @@ public class SeleniumTestCaseGenerator {
 				sb.append("\"));\n");
 			} else if (param1.equals("storeEval")) {
 				sb.append("String ").append(param3).append(" = selenium.getEval(\"").append(param2).append("\").toString();\n");
+			} else if (param1.equals("store")) {
+				sb.append("String ").append(param3).append(" = (\"\" + ").append(param2).append(" + \"\").toString();\n");
 			} else if (param1.equals("keyDown")) {
 				sb.append("selenium.");
 				sb.append(param1);
@@ -482,7 +486,6 @@ public class SeleniumTestCaseGenerator {
 				sb.append("\").equals(\"");
 				sb.append(param3);
 				sb.append("\"));\n");
-			//-----------------------------	
 			} else if (param1.equals("assertNotVisible")) {
 				sb.append("TestCase.assertFalse(selenium.isVisible");
 				sb.append("(\"");
@@ -520,7 +523,6 @@ public class SeleniumTestCaseGenerator {
 				sb.append("selenium.deleteCookie(\"").append(param2).append("\",\"").append(param3).append("\");\n");
 			} else if (param1.equals("windowMaximize")) {
 				sb.append("selenium.windowMaximize()").append(";\n");
-
 			} else if (param1.equals("waitForText")) {
 				sb.append("for (int second = 0;; second++) {\n");
 				sb.append(getTimeoutMessage(param1));
@@ -532,7 +534,46 @@ public class SeleniumTestCaseGenerator {
 			} else if (param1.equals("refresh")) {
 				sb.append("selenium.refresh();\n");
 			 
-			//-----------------add by linh_vu------------
+			//------------------User extension----------------
+			/**
+        		 * CreateFolderbyTime will create a Folder on Linux by time with current date and newest Rev : revXXXXX/YYYYMMDD/
+			 * Account use to create Folder is root
+			 */
+			} else if (param1.equals("eXoCreateFolderReportPLF30x")) {
+				sb.append("String pathDirReportPLF30x = \"/home/SELENIUM-PLF3.0.X/workspace/AutoCommitSeleniumReportDaily_PLF3.0.x/rev\" + ");
+                                sb.append(param3);
+				sb.append(" + ");
+				sb.append("\"/\"");
+                                sb.append(" + ");
+				sb.append(param2);
+				sb.append("; \n");
+				sb.append("new File(pathDirReportPLF30x).mkdirs();\n");
+			} else if (param1.equals("eXocopyReportPLF30x")) {
+				sb.append("File fOrigPLF30x = new File(\"/home/SELENIUM-PLF3.0.X/workspace/SELENIUM-SNIFF-PLF3.0.X/target/tests.exoplatform.org/\"");
+				sb.append(" + ");
+                                sb.append(param2);	       
+                                sb.append(");\n");
+				sb.append("File fDestPLF30x = new File(pathDirReportPLF30x);\n");
+                                sb.append("FileUtils.copyFileToDirectory(fOrigPLF30x, fDestPLF30x); \n");
+			}else if (param1.equals("eXoCreateFolderReportPLF35x")) {
+				sb.append("String pathDirReportPLF35x = \"/home/SELENIUM-PLF3.0.X/workspace/AutoCommitSeleniumReportDaily_PLF3.5.x/rev\" + ");
+                                sb.append(param3);
+				sb.append(" + ");
+				sb.append("\"/\"");
+                                sb.append(" + ");
+				sb.append(param2);
+				sb.append("; \n");
+				sb.append("new File(pathDirReportPLF35x).mkdirs();\n");
+			} else if (param1.equals("eXocopyReportPLF35x")) {
+				sb.append("File fOrigPLF35x = new File(\"/home/SELENIUM-PLF3.0.X/workspace/SELENIUM-SNIFF-PLF3.5.X/target/tests.exoplatform.org/\"");
+				sb.append(" + ");
+                                sb.append(param2);	       
+                                sb.append(");\n");
+				sb.append("File fDestPLF35x = new File(pathDirReportPLF35x);\n");
+                                sb.append("FileUtils.copyFileToDirectory(fOrigPLF35x, fDestPLF35x); \n");
+
+	
+		        //---------------------------------end-----------
 			} else if (param1.equals("keyDown")) {
 				sb.append("selenium.");
 				sb.append(param1);
@@ -571,18 +612,21 @@ public class SeleniumTestCaseGenerator {
 				sb.append("\\\",\\\"");
                                 sb.append(param3);
 				sb.append("\\\"));\n");
-		        //-------------------------------------
-			
 			} else if (param1.equals("refreshAndWait")) {
 				sb.append("selenium.refresh();\n");
 				sb.append("selenium.waitForPageToLoad(timeout);\n");
 			} else if (param1.equals("storeXpathCount")) {
 				sb.append("String ").append(param3).append(" = selenium.getXpathCount(\"").append(param2).append(
 				      "\").toString();\n");
+			}else if (param1.equals("storeText")) {
+				sb.append("String ").append(param3).append(" = selenium.getText(\"").append(param2).append(
+				      "\").toString();\n");
 			} else if (param1.equals("verifyOrdered")) {
 				sb.append("selenium.isOrdered(\"").append(param2).append("\",\"").append(param3).append("\");\n"); 
 			} else if (param1.equals("dragAndDropToObject")) {
 				sb.append("selenium.dragAndDropToObject(\"").append(param2).append("\",\"").append(param3).append("\");\n");
+
+
 			} else if (param1.equals("componentExoContextMenu")) {
 				sb.append("selenium.getEval(\"selenium.doComponentExoContextMenu(\\\"").append(param2)
 				      .append("\\\")\");\n");
