@@ -571,7 +571,22 @@ public class SeleniumTestCaseGenerator {
                                 sb.append(");\n");
 				sb.append("File fDestPLF35x = new File(pathDirReportPLF35x);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigPLF35x, fDestPLF35x); \n");
-
+                         }else if (param1.equals("eXoCreateFolderReportCS")) {
+				sb.append("String pathDirReportCS = \"/home/SELENIUM-CS-CLIENT/workspace/CommitReport_CS/rev\" + ");
+                                sb.append(param3);
+				sb.append(" + ");
+				sb.append("\"/\"");
+                                sb.append(" + ");
+				sb.append(param2);
+				sb.append("; \n");
+				sb.append("new File(pathDirReportCS).mkdirs();\n");
+			} else if (param1.equals("eXocopyReportCS")) {
+				sb.append("File fOrigCS = new File(\"/home/SELENIUM-CS-CLIENT/workspace/Selenium_on_CS/target/tests.exoplatform.org/\"");
+				sb.append(" + ");
+                                sb.append(param2);	       
+                                sb.append(");\n");
+				sb.append("File fDestCS = new File(pathDirReportCS);\n");
+                                sb.append("FileUtils.copyFileToDirectory(fOrigCS, fDestCS); \n");
 	
 		        //---------------------------------end-----------
 			} else if (param1.equals("keyDown")) {
