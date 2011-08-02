@@ -619,6 +619,22 @@ public class SeleniumTestCaseGenerator {
                                 sb.append(");\n");
 				sb.append("File fDestECMS = new File(pathDirReportECMS);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigECMS, fDestECMS); \n");
+			} else if (param1.equals("eXoCreateFolderReportGATEIN")) {
+				sb.append("String pathDirReportGATEIN = \"/home/SELENIUM-GATEIN-CLIENT/workspace/CommitReport_GATEIN/rev\" + ");
+                                sb.append(param3);
+				sb.append(" + ");
+				sb.append("\"/\"");
+                                sb.append(" + ");
+				sb.append(param2);
+				sb.append("; \n");
+				sb.append("new File(pathDirReportGATEIN).mkdirs();\n");
+			} else if (param1.equals("eXocopyReportGATEIN")) {
+				sb.append("File fOrigGATEIN = new File(\"/home/SELENIUM-GATEIN-CLIENT/workspace/Selenium_on_GATEIN/target/tests.exoplatform.org/\"");
+				sb.append(" + ");
+                                sb.append(param2);	       
+                                sb.append(");\n");
+				sb.append("File fDestGATEIN = new File(pathDirReportGATEIN);\n");
+                                sb.append("FileUtils.copyFileToDirectory(fOrigGATEIN, fDestGATEIN); \n");
 		        //---------------------------------end-----------
 			} else if (param1.equals("keyDown")) {
 				sb.append("selenium.");
