@@ -162,7 +162,7 @@ public class SeleniumTestCaseGenerator {
 			param3 = param3.replaceAll("storedVars\\['([a-z0-9A-Z]*)'\\]", "'\" + $1 + \"'");
 
 			sb.append("\n  //" + count + ": " + param1 + " | " + param2 + " | " + param3 + "\n");
-			if (param1.equals("assertConfirmation")) {
+			if (param1.equals("assertConfirmation") || param1.equals("verifyConfirmation")) {
 				param2 = replace(param2, "?", "[\\\\s\\\\S]");
 				sb.append("TestCase.assertTrue(selenium.getConfirmation().matches(\"^");
 				sb.append(param2);
