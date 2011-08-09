@@ -619,6 +619,22 @@ public class SeleniumTestCaseGenerator {
                                 sb.append(");\n");
 				sb.append("File fDestKS = new File(pathDirReportKS);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigKS, fDestKS); \n");
+			} else if (param1.equals("eXoCreateFolderReportKS22X")) {
+				sb.append("String pathDirReportKS22X = \"/home/SELENIUM-KS-CLIENT/workspace/_CommitReport_KS22X/rev\" + ");
+                                sb.append(param3);
+				sb.append(" + ");
+				sb.append("\"/\"");
+                                sb.append(" + ");
+				sb.append(param2);
+				sb.append("; \n");
+				sb.append("new File(pathDirReportKS22X).mkdirs();\n");
+			} else if (param1.equals("eXocopyReportKS22X")) {
+				sb.append("File fOrigKS22X = new File(\"/home/SELENIUM-KS-CLIENT/workspace/_Selenium_on_KS22X/target/tests.exoplatform.org/\"");
+				sb.append(" + ");
+                                sb.append(param2);	       
+                                sb.append(");\n");
+				sb.append("File fDestKS22X = new File(pathDirReportKS22X);\n");
+                                sb.append("FileUtils.copyFileToDirectory(fOrigKS22X, fDestKS22X); \n");
 			} else if (param1.equals("eXoCreateFolderReportECMS")) {
 				sb.append("String pathDirReportECMS = \"/home/SELENIUM-ECMS-CLIENT/workspace/CommitReport_ECMS/rev\" + ");
                                 sb.append(param3);
