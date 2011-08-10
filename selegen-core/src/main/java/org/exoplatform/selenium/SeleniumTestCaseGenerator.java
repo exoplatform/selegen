@@ -683,6 +683,39 @@ public class SeleniumTestCaseGenerator {
                                 sb.append(");\n");
 				sb.append("File fDestSOC = new File(pathDirReportSOC);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigSOC, fDestSOC); \n");
+                        } else if (param1.equals("eXoCreateFolderReportSOC12X")) {
+				sb.append("String pathDirReportSOC12X = \"/home/SELENIUM-SOCIAL-CLIENT/workspace/_CommitReport_SOC12X/rev\" + ");
+                                sb.append(param3);
+				sb.append(" + ");
+				sb.append("\"/\"");
+                                sb.append(" + ");
+				sb.append(param2);
+				sb.append("; \n");
+				sb.append("new File(pathDirReportSOC12X).mkdirs();\n");
+			} else if (param1.equals("eXocopyReportSOC12X")) {
+				sb.append("File fOrigSOC12X = new File(\"/home/SELENIUM-SOCIAL-CLIENT/workspace/_Selenium_on_Social12X/target/tests.exoplatform.org/\"");
+				sb.append(" + ");
+                                sb.append(param2);	       
+                                sb.append(");\n");
+				sb.append("File fDestSOC12X = new File(pathDirReportSOC12X);\n");
+                                sb.append("FileUtils.copyFileToDirectory(fOrigSOC12X, fDestSOC12X); \n");
+                       } else if (param1.equals("eXoCreateFolderReportWebOS")) {
+				sb.append("String pathDirReportWebOS = \"/home/SELENIUM-GATEIN-CLIENT/workspace/_CommitReport_WebOS/rev\" + ");
+                                sb.append(param3);
+				sb.append(" + ");
+				sb.append("\"/\"");
+                                sb.append(" + ");
+				sb.append(param2);
+				sb.append("; \n");
+				sb.append("new File(pathDirReportWebOS).mkdirs();\n");
+                      } else if (param1.equals("eXocopyReportWebOS")) {
+				sb.append("File fOrigWebOS = new File(\"/home/SELENIUM-GATEIN-CLIENT/workspace/_Selenium_on_WebOS/target/tests.exoplatform.org/\"");
+				sb.append(" + ");
+                                sb.append(param2);	       
+                                sb.append(");\n");
+				sb.append("File fDestWebOS = new File(pathDirReportWebOS);\n");
+                                sb.append("FileUtils.copyFileToDirectory(fOrigWebOS, fDestWebOS); \n");
+
 		        //---------------------------------end-----------
 			} else if (param1.equals("keyDown")) {
 				sb.append("selenium.");
