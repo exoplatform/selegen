@@ -571,8 +571,8 @@ public class SeleniumTestCaseGenerator {
                                 sb.append(");\n");
 				sb.append("File fDestPLF35x = new File(pathDirReportPLF35x);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigPLF35x, fDestPLF35x); \n");
-                         } else if (param1.equals("eXoCreateFolderReportCS22X")) {
-				sb.append("String pathDirReportCS22X = \"/home/SELENIUM-CS-CLIENT/workspace/_CommitReport_CS22X/rev\" + ");
+                         } else if (param1.equals("createReportCS22X")) {
+				sb.append("String pathDirReportCS22X = \"/home/SELENIUM-CS-CLIENT/workspace/Commit_Result_CS_2_2_2/rev\" + ");
                                 sb.append(param3);
 				sb.append(" + ");
 				sb.append("\"/\"");
@@ -580,14 +580,14 @@ public class SeleniumTestCaseGenerator {
 				sb.append(param2);
 				sb.append("; \n");
 				sb.append("new File(pathDirReportCS22X).mkdirs();\n");
-			} else if (param1.equals("eXocopyReportCS22X")) {
-				sb.append("File fOrigCS22X = new File(\"/home/SELENIUM-CS-CLIENT/workspace/_Selenium_on_CS22X/target/tests.exoplatform.org/\"");
+			} else if (param1.equals("copyReportCS22X")) {
+				sb.append("File fOrigCS22X = new File(\"/home/SELENIUM-CS-CLIENT/workspace/Run_Selenium_on_CS_2_2_2/target/tests.exoplatform.org/\"");
 				sb.append(" + ");
                                 sb.append(param2);	       
                                 sb.append(");\n");
-				sb.append("File fDestCS22X = new File(pathDirReportCS22X);\n");
+					sb.append("File fDestCS22X = new File(pathDirReportCS22X);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigCS22X, fDestCS22X); \n");
-			} else if (param1.equals("CreateReport_CS230")) {
+			} else if (param1.equals("createReport_CS230")) {
 				sb.append("String pathDirReportCS = \"/home/SELENIUM-CS-CLIENT/workspace/Commit_Result_CS_2_3_0_SNAPSHOT/rev\" + ");
                                 sb.append(param3);
 				sb.append(" + ");
@@ -596,7 +596,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append(param2);
 				sb.append("; \n");
 				sb.append("new File(pathDirReportCS).mkdirs();\n");
-			} else if (param1.equals("Report_CS230")) {
+			} else if (param1.equals("copyReport_CS230")) {
 				sb.append("File fOrigCS = new File(\"/home/SELENIUM-CS-CLIENT/workspace/Run_Selenium_on_CS_2_3_0_SNAPSHOT/target/tests.exoplatform.org/\"");
 				sb.append(" + ");
                                 sb.append(param2);	       
