@@ -620,7 +620,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("File fDestCS = new File(pathDirReportCS);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigCS, fDestCS); \n");
 			} else if (param1.equals("createReportKS230")) {
-				sb.append("String pathDirReportKS = \"/home/SELENIUM-KS-CLIENT/workspace/CommitReport_KS/rev\" + ");
+				sb.append("String pathDirReportKS = \"/home/SELENIUM-KS-CLIENT/workspace/Commit_Result_KS_2_3_0_SNAPSHOT/rev\" + ");
                                 sb.append(param3);
 				sb.append(" + ");
 				sb.append("\"/\"");
