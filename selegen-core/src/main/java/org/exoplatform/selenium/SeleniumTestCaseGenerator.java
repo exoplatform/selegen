@@ -619,7 +619,7 @@ public class SeleniumTestCaseGenerator {
                                 sb.append(");\n");
 				sb.append("File fDestCS = new File(pathDirReportCS);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigCS, fDestCS); \n");
-			} else if (param1.equals("eXoCreateFolderReportKS")) {
+			} else if (param1.equals("createReportKS230")) {
 				sb.append("String pathDirReportKS = \"/home/SELENIUM-KS-CLIENT/workspace/CommitReport_KS/rev\" + ");
                                 sb.append(param3);
 				sb.append(" + ");
@@ -628,15 +628,15 @@ public class SeleniumTestCaseGenerator {
 				sb.append(param2);
 				sb.append("; \n");
 				sb.append("new File(pathDirReportKS).mkdirs();\n");
-			} else if (param1.equals("createReportKS230")) {
+			} else if (param1.equals("copyReportKS230")) {
 				sb.append("File fOrigKS = new File(\"/home/SELENIUM-KS-CLIENT/workspace/Run_Selenium_on_KS_2_3_0_SNAPSHOT/target/tests.exoplatform.org/\"");
 				sb.append(" + ");
                                 sb.append(param2);	       
                                 sb.append(");\n");
 				sb.append("File fDestKS = new File(pathDirReportKS);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigKS, fDestKS); \n");
-			} else if (param1.equals("copyReportKS230")) {
-				sb.append("String pathDirReportKS22X = \"/home/SELENIUM-KS-CLIENT/workspace/Commit_Result_KS_2_3_0_SNAPSHOT/rev\" + ");
+			} else if (param1.equals("createReportKS22X")) {
+				sb.append("String pathDirReportKS22X = \"/home/SELENIUM-KS-CLIENT/workspace/Commit_Result_KS_2_2_2/rev\" + ");
                                 sb.append(param3);
 				sb.append(" + ");
 				sb.append("\"/\"");
@@ -644,8 +644,8 @@ public class SeleniumTestCaseGenerator {
 				sb.append(param2);
 				sb.append("; \n");
 				sb.append("new File(pathDirReportKS22X).mkdirs();\n");
-			} else if (param1.equals("eXocopyReportKS22X")) {
-				sb.append("File fOrigKS22X = new File(\"/home/SELENIUM-KS-CLIENT/workspace/_Selenium_on_KS22X/target/tests.exoplatform.org/\"");
+			} else if (param1.equals("copyReportKS22X")) {
+				sb.append("File fOrigKS22X = new File(\"/home/SELENIUM-KS-CLIENT/workspace/Run_Selenium_on_KS_2_2_2/target/tests.exoplatform.org/\"");
 				sb.append(" + ");
                                 sb.append(param2);	       
                                 sb.append(");\n");
