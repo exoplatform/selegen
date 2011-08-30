@@ -628,15 +628,15 @@ public class SeleniumTestCaseGenerator {
 				sb.append(param2);
 				sb.append("; \n");
 				sb.append("new File(pathDirReportKS).mkdirs();\n");
-			} else if (param1.equals("eXocopyReportKS")) {
-				sb.append("File fOrigKS = new File(\"/home/SELENIUM-KS-CLIENT/workspace/Selenium_on_KS/target/tests.exoplatform.org/\"");
+			} else if (param1.equals("createReportKS230")) {
+				sb.append("File fOrigKS = new File(\"/home/SELENIUM-KS-CLIENT/workspace/Run_Selenium_on_KS_2_3_0_SNAPSHOT/target/tests.exoplatform.org/\"");
 				sb.append(" + ");
                                 sb.append(param2);	       
                                 sb.append(");\n");
 				sb.append("File fDestKS = new File(pathDirReportKS);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigKS, fDestKS); \n");
-			} else if (param1.equals("eXoCreateFolderReportKS22X")) {
-				sb.append("String pathDirReportKS22X = \"/home/SELENIUM-KS-CLIENT/workspace/_CommitReport_KS22X/rev\" + ");
+			} else if (param1.equals("copyReportKS230")) {
+				sb.append("String pathDirReportKS22X = \"/home/SELENIUM-KS-CLIENT/workspace/Commit_Result_KS_2_3_0_SNAPSHOT/rev\" + ");
                                 sb.append(param3);
 				sb.append(" + ");
 				sb.append("\"/\"");
