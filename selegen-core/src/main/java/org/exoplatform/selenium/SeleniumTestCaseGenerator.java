@@ -680,7 +680,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("File fOrigGATEIN = new File(\"/home/SELENIUM-GATEIN-CLIENT/workspace/Run_Selenium_eXoGTN_3_2_0_PLF/target/site/\"");
 				sb.append(" + ");
                                 sb.append(param2);	       
-                                sb.append(");\n");bao gio CK dc
+                                sb.append(");\n");
 				sb.append("File fDestGATEIN = new File(pathDirReportGATEIN);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigGATEIN, fDestGATEIN); \n");
 			} else if (param1.equals("eXoCreateFolderReportSOC")) {
