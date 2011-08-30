@@ -667,8 +667,8 @@ public class SeleniumTestCaseGenerator {
                                 sb.append(");\n");
 				sb.append("File fDestECMS = new File(pathDirReportECMS);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigECMS, fDestECMS); \n");
-			} else if (param1.equals("eXoCreateFolderReportGATEIN")) {
-				sb.append("String pathDirReportGATEIN = \"/home/SELENIUM-GATEIN-CLIENT/workspace/CommitReport_GateIn/rev\" + ");
+			} else if (param1.equals("ReporteXoGTN320")) {
+				sb.append("String pathDirReportGATEIN = \"/home/SELENIUM-GATEIN-CLIENT/workspace/Commit_Result_eXoGTN_3_2_0_PLF/rev\" + ");
                                 sb.append(param3);
 				sb.append(" + ");
 				sb.append("\"/\"");
@@ -676,11 +676,11 @@ public class SeleniumTestCaseGenerator {
 				sb.append(param2);
 				sb.append("; \n");
 				sb.append("new File(pathDirReportGATEIN).mkdirs();\n");
-			} else if (param1.equals("eXocopyReportGATEIN")) {
-				sb.append("File fOrigGATEIN = new File(\"/home/SELENIUM-GATEIN-CLIENT/workspace/Selenium_on_GateIn/target/tests.exoplatform.org/\"");
+			} else if (param1.equals("copyReporteXoGTN320")) {
+				sb.append("File fOrigGATEIN = new File(\"/home/SELENIUM-GATEIN-CLIENT/workspace/Run_Selenium_eXoGTN_3_2_0_PLF/target/site/\"");
 				sb.append(" + ");
                                 sb.append(param2);	       
-                                sb.append(");\n");
+                                sb.append(");\n");bao gio CK dc
 				sb.append("File fDestGATEIN = new File(pathDirReportGATEIN);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigGATEIN, fDestGATEIN); \n");
 			} else if (param1.equals("eXoCreateFolderReportSOC")) {
