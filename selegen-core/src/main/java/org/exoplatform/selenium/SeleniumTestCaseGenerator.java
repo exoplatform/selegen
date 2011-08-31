@@ -585,7 +585,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append(" + ");
                                 sb.append(param2);	       
                                 sb.append(");\n");
-					sb.append("File fDestCS22X = new File(pathDirReportCS22X);\n");
+				sb.append("File fDestCS22X = new File(pathDirReportCS22X);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigCS22X, fDestCS22X); \n");
 			} else if (param1.equals("createReportCS21X")) {
 				sb.append("String pathDirReportCS21X = \"/home/SELENIUM-CS-CLIENT/workspace/Commit_Result_CS_2_1_6/rev\" + ");
@@ -731,8 +731,23 @@ public class SeleniumTestCaseGenerator {
                                 sb.append(");\n");
 				sb.append("File fDestWebOS = new File(pathDirReportWebOS);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigWebOS, fDestWebOS); \n");
-
-		        //---------------------------------end-----------
+		     } else if (param1.equals("createReportECMS216")) {
+				sb.append("String pathDirReportECMS21X = \"/home/SELENIUM-ECMS-CLIENT/workspace/Commit_Result_ECMS_2_1_6/rev\" + ");
+                                sb.append(param3);
+				sb.append(" + ");
+				sb.append("\"/\"");
+                                sb.append(" + ");
+				sb.append(param2);
+				sb.append("; \n");
+				sb.append("new File(pathDirReportECMS21X).mkdirs();\n");
+			} else if (param1.equals("copyReportECMS216")) {
+				sb.append("File fOrigECMS21X = new File(\"/home/SELENIUM-ECMS-CLIENT/workspace/Run_Selenium_on_ECMS_2_1_6/target/tests.exoplatform.org/\"");
+				sb.append(" + ");
+                                sb.append(param2);	       
+                                sb.append(");\n");
+				sb.append("File fDestECMS21X = new File(pathDirReportECMS21X);\n");
+                                sb.append("FileUtils.copyFileToDirectory(fOrigECMS21X, fDestECMS21X); \n");
+    //---------------------------------end-----------
 			} else if (param1.equals("keyDown")) {
 				sb.append("selenium.");
 				sb.append(param1);
