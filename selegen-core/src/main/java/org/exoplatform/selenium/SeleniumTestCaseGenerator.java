@@ -540,7 +540,7 @@ public class SeleniumTestCaseGenerator {
 			 * Account use to create Folder is root
 			 */
 			} else if (param1.equals("eXoCreateFolderReportPLF30x")) {
-				sb.append("String pathDirReportPLF30x = \"/home/SELENIUM-PLF3.0.X/workspace/AutoCommitSeleniumReportDaily_PLF3.0.x/rev\" + ");
+				sb.append("String pathDirReportPLF30x = \"/home/SELENIUM-PLF3.0.X/workspace/Commit_Result_PLF_3_0_6/rev\" + ");
                                 sb.append(param3);
 				sb.append(" + ");
 				sb.append("\"/\"");
@@ -549,14 +549,14 @@ public class SeleniumTestCaseGenerator {
 				sb.append("; \n");
 				sb.append("new File(pathDirReportPLF30x).mkdirs();\n");
 			} else if (param1.equals("eXocopyReportPLF30x")) {
-				sb.append("File fOrigPLF30x = new File(\"/home/SELENIUM-PLF3.0.X/workspace/SELENIUM-SNIFF-PLF3.0.X/target/tests.exoplatform.org/\"");
+				sb.append("File fOrigPLF30x = new File(\"/home/SELENIUM-PLF3.0.X/workspace/Run_Selenium_on_PLF_3_0_6/target/tests.exoplatform.org/\"");
 				sb.append(" + ");
                                 sb.append(param2);	       
                                 sb.append(");\n");
 				sb.append("File fDestPLF30x = new File(pathDirReportPLF30x);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigPLF30x, fDestPLF30x); \n");
 			}else if (param1.equals("eXoCreateFolderReportPLF35x")) {
-				sb.append("String pathDirReportPLF35x = \"/home/SELENIUM-PLF3.5.X/workspace/AutoCommitSeleniumReportDaily_PLF3.5.x/rev\" + ");
+				sb.append("String pathDirReportPLF35x = \"/home/SELENIUM-PLF3.5.X/workspace/Commit_Result_PLF_3_5_0_BETA1/rev\" + ");
                                 sb.append(param3);
 				sb.append(" + ");
 				sb.append("\"/\"");
@@ -565,7 +565,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("; \n");
 				sb.append("new File(pathDirReportPLF35x).mkdirs();\n");
 			} else if (param1.equals("eXocopyReportPLF35x")) {
-				sb.append("File fOrigPLF35x = new File(\"/home/SELENIUM-PLF3.5.X/workspace/SELENIUM-SNIFF-PLF3.5.X/target/tests.exoplatform.org/\"");
+				sb.append("File fOrigPLF35x = new File(\"/home/SELENIUM-PLF3.5.X/workspace/Run_Selenium_on_PLF_3_5_0_BETA1/target/tests.exoplatform.org/\"");
 				sb.append(" + ");
                                 sb.append(param2);	       
                                 sb.append(");\n");
@@ -651,6 +651,22 @@ public class SeleniumTestCaseGenerator {
                                 sb.append(");\n");
 				sb.append("File fDestKS22X = new File(pathDirReportKS22X);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigKS22X, fDestKS22X); \n");
+			} else if (param1.equals("createReportKS21X")) {
+				sb.append("String pathDirReportKS21X = \"/home/SELENIUM-KS-CLIENT/workspace/Commit_Result_KS_2_1_6/rev\" + ");
+                                sb.append(param3);
+				sb.append(" + ");
+				sb.append("\"/\"");
+                                sb.append(" + ");
+				sb.append(param2);
+				sb.append("; \n");
+				sb.append("new File(pathDirReportKS21X).mkdirs();\n");
+			} else if (param1.equals("copyReportKS21X")) {
+				sb.append("File fOrigKS21X = new File(\"/home/SELENIUM-KS-CLIENT/workspace/Run_Selenium_on_KS_2_1_6/target/tests.exoplatform.org/\"");
+				sb.append(" + ");
+                                sb.append(param2);	       
+                                sb.append(");\n");
+				sb.append("File fDestKS21X = new File(pathDirReportKS21X);\n");
+                                sb.append("FileUtils.copyFileToDirectory(fOrigKS21X, fDestKS21X); \n");
 			} else if (param1.equals("createReportECMS230GA")) {
 				sb.append("String pathDirReportECMS = \"/home/SELENIUM-ECMS-CLIENT/workspace/Commit_Result_ECMS_2_3_0_GA/rev\" + ");
                                 sb.append(param3);
@@ -699,8 +715,40 @@ public class SeleniumTestCaseGenerator {
                                 sb.append(");\n");
 				sb.append("File fDestWebOS = new File(pathDirReportWebOS);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigWebOS, fDestWebOS); \n");
+			} else if (param1.equals("ReporteXoGTN3110")) {
+				sb.append("String pathDirReportGTN3110 = \"/home/SELENIUM-GATEIN-CLIENT/workspace/Commit_Result_eXoGTN_3_1_10_PLF/rev\" + ");
+                                sb.append(param3);
+				sb.append(" + ");
+				sb.append("\"/\"");
+                                sb.append(" + ");
+				sb.append(param2);
+				sb.append("; \n");
+				sb.append("new File(pathDirReportGTN3110).mkdirs();\n");
+			} else if (param1.equals("copyReporteXoGTN3110")) {
+				sb.append("File fOrigGTN3110 = new File(\"/home/SELENIUM-GATEIN-CLIENT/workspace/Run_Selenium_eXoGTN_3_1_10_PLF/target/site/\"");
+				sb.append(" + ");
+                                sb.append(param2);	       
+                                sb.append(");\n");
+				sb.append("File fDestGTN3110 = new File(pathDirReportGTN3110);\n");
+                                sb.append("FileUtils.copyFileToDirectory(fOrigGTN3110, fDestGTN3110); \n");
+			}else if (param1.equals("ReportJbossGTN")) {
+				sb.append("String pathDirReportGTN3110 = \"/home/SELENIUM-GATEIN-CLIENT/workspace/Commit_Result_JBossGTN_3_2_0_M02/rev\" + ");
+                                sb.append(param3);
+				sb.append(" + ");
+				sb.append("\"/\"");
+                                sb.append(" + ");
+				sb.append(param2);
+				sb.append("; \n");
+				sb.append("new File(pathDirReportGTN3110).mkdirs();\n");
+			} else if (param1.equals("copyReportJbossGTN")) {
+				sb.append("File fOrigJbossGTN = new File(\"/home/SELENIUM-GATEIN-CLIENT/workspace/Run_Selenium_JBossGTN_3_2_0_M02/target/site/\"");
+				sb.append(" + ");
+                                sb.append(param2);	       
+                                sb.append(");\n");
+				sb.append("File fDestJbossGTN = new File(pathDirReportJbossGTN);\n");
+                                sb.append("FileUtils.copyFileToDirectory(fOrigJbossGTN, fDestJbossGTN); \n");
 			} else if (param1.equals("eXoCreateFolderReportSOC")) {
-				sb.append("String pathDirReportSOC = \"/home/SELENIUM-SOCIAL-CLIENT/workspace/CommitReport_SOC/rev\" + ");
+				sb.append("String pathDirReportSOC = \"/home/SELENIUM-SOCIAL-CLIENT/workspace/Commit_Result_SOC_1_3_0_SNAPSHOT/rev\" + ");
                                 sb.append(param3);
 				sb.append(" + ");
 				sb.append("\"/\"");
@@ -709,14 +757,30 @@ public class SeleniumTestCaseGenerator {
 				sb.append("; \n");
 				sb.append("new File(pathDirReportSOC).mkdirs();\n");
 			} else if (param1.equals("eXocopyReportSOC")) {
-				sb.append("File fOrigSOC = new File(\"/home/SELENIUM-SOCIAL-CLIENT/workspace/Selenium_on_Social/target/tests.exoplatform.org/\"");
+				sb.append("File fOrigSOC = new File(\"/home/SELENIUM-SOCIAL-CLIENT/workspace/Run_Selenium_on_SOC_1_3_0_SNAPSHOT/target/tests.exoplatform.org/\"");
 				sb.append(" + ");
                                 sb.append(param2);	       
                                 sb.append(");\n");
 				sb.append("File fDestSOC = new File(pathDirReportSOC);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigSOC, fDestSOC); \n");
+                        } else if (param1.equals("eXoCreateFolderReportSOC11X")) {
+				sb.append("String pathDirReportSOC11X = \"/home/SELENIUM-SOCIAL-CLIENT/workspace/Commit_Result_SOC_1_1_6/rev\" + ");
+                                sb.append(param3);
+				sb.append(" + ");
+				sb.append("\"/\"");
+                                sb.append(" + ");
+				sb.append(param2);
+				sb.append("; \n");
+				sb.append("new File(pathDirReportSOC11X).mkdirs();\n");
+			} else if (param1.equals("eXocopyReportSOC11X")) {
+				sb.append("File fOrigSOC11X = new File(\"/home/SELENIUM-SOCIAL-CLIENT/workspace/Run_Selenium_on_SOC_1_1_6/target/tests.exoplatform.org/\"");
+				sb.append(" + ");
+                                sb.append(param2);	       
+                                sb.append(");\n");
+				sb.append("File fDestSOC11X = new File(pathDirReportSOC11X);\n");
+                                sb.append("FileUtils.copyFileToDirectory(fOrigSOC11X, fDestSOC11X); \n");
                         } else if (param1.equals("eXoCreateFolderReportSOC12X")) {
-				sb.append("String pathDirReportSOC12X = \"/home/SELENIUM-SOCIAL-CLIENT/workspace/_CommitReport_SOC12X/rev\" + ");
+				sb.append("String pathDirReportSOC12X = \"/home/SELENIUM-SOCIAL-CLIENT/workspace/Commit_Result_SOC_1_2_2/rev\" + ");
                                 sb.append(param3);
 				sb.append(" + ");
 				sb.append("\"/\"");
@@ -725,14 +789,14 @@ public class SeleniumTestCaseGenerator {
 				sb.append("; \n");
 				sb.append("new File(pathDirReportSOC12X).mkdirs();\n");
 			} else if (param1.equals("eXocopyReportSOC12X")) {
-				sb.append("File fOrigSOC12X = new File(\"/home/SELENIUM-SOCIAL-CLIENT/workspace/_Selenium_on_Social12X/target/tests.exoplatform.org/\"");
+				sb.append("File fOrigSOC12X = new File(\"/home/SELENIUM-SOCIAL-CLIENT/workspace/Run_Selenium_on_SOC_1_2_2/target/tests.exoplatform.org/\"");
 				sb.append(" + ");
                                 sb.append(param2);	       
                                 sb.append(");\n");
 				sb.append("File fDestSOC12X = new File(pathDirReportSOC12X);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigSOC12X, fDestSOC12X); \n");
                        } else if (param1.equals("eXoCreateFolderReportWebOS")) {
-				sb.append("String pathDirReportWebOS = \"/home/SELENIUM-GATEIN-CLIENT/workspace/_CommitReport_WebOS/rev\" + ");
+				sb.append("String pathDirReportWebOS = \"/home/SELENIUM-GATEIN-CLIENT/workspace/Commit_Result_eXoWebOS_2_2_0/rev\" + ");
                                 sb.append(param3);
 				sb.append(" + ");
 				sb.append("\"/\"");
@@ -741,7 +805,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("; \n");
 				sb.append("new File(pathDirReportWebOS).mkdirs();\n");
                       } else if (param1.equals("eXocopyReportWebOS")) {
-				sb.append("File fOrigWebOS = new File(\"/home/SELENIUM-GATEIN-CLIENT/workspace/_Selenium_on_WebOS/target/tests.exoplatform.org/\"");
+				sb.append("File fOrigWebOS = new File(\"/home/SELENIUM-GATEIN-CLIENT/workspace/Run_Selenium_WebOS_2_2_0/target/tests.exoplatform.org/\"");
 				sb.append(" + ");
                                 sb.append(param2);	       
                                 sb.append(");\n");
