@@ -700,7 +700,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("File fDestGATEIN = new File(pathDirReportGATEIN);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigGATEIN, fDestGATEIN); \n");
 			} else if (param1.equals("ReporteXoWebOS")) {
-				sb.append("String pathDirReportWebOS = \"/home/SELENIUM-GATEIN-CLIENT/workspace/Commit_Result_eXoWebOS_2_2_0/rev\" + ");
+				sb.append("String pathDirReportWebOS = \"/home/SELENIUM-GATEIN-CLIENT/workspace/Commit_Result_eXoWebOS_2_0_0/rev\" + ");
                                 sb.append(param3);
 				sb.append(" + ");
 				sb.append("\"/\"");
@@ -709,7 +709,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("; \n");
 				sb.append("new File(pathDirReportWebOS).mkdirs();\n");
 			} else if (param1.equals("copyReporteXoWebOS")) {
-				sb.append("File fOrigWebOS = new File(\"/home/SELENIUM-GATEIN-CLIENT/workspace/Run_Selenium_WebOS_2_2_0/target/site/\"");
+				sb.append("File fOrigWebOS = new File(\"/home/SELENIUM-GATEIN-CLIENT/workspace/Run_Selenium_WebOS_2_0_0/target/site/\"");
 				sb.append(" + ");
                                 sb.append(param2);	       
                                 sb.append(");\n");
