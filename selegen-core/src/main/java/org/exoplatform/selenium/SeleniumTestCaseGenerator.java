@@ -780,7 +780,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("File fDestSOC11X = new File(pathDirReportSOC11X);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigSOC11X, fDestSOC11X); \n");
                         } else if (param1.equals("eXoCreateFolderReportSOC12X")) {
-				sb.append("String pathDirReportSOC12X = \"/home/SELENIUM-SOCIAL-CLIENT/workspace/Commit_Result_SOC_1_2_3_SNAPSHOT/rev\" + ");
+				sb.append("String pathDirReportSOC12X = \"/home/SELENIUM-SOCIAL-CLIENT/workspace/Commit_Result_SOC_1_2_4_SNAPSHOT/rev\" + ");
                                 sb.append(param3);
 				sb.append(" + ");
 				sb.append("\"/\"");
@@ -789,7 +789,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("; \n");
 				sb.append("new File(pathDirReportSOC12X).mkdirs();\n");
 			} else if (param1.equals("eXocopyReportSOC12X")) {
-				sb.append("File fOrigSOC12X = new File(\"/home/SELENIUM-SOCIAL-CLIENT/workspace/Run_Selenium_SOC_1_2_3_SNAPSHOT/target/tests.exoplatform.org/\"");
+				sb.append("File fOrigSOC12X = new File(\"/home/SELENIUM-SOCIAL-CLIENT/workspace/Run_Selenium_SOC_1_2_4_SNAPSHOT/target/tests.exoplatform.org/\"");
 				sb.append(" + ");
                                 sb.append(param2);	       
                                 sb.append(");\n");
