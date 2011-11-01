@@ -668,7 +668,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("File fDestKS21X = new File(pathDirReportKS21X);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigKS21X, fDestKS21X); \n");
 			} else if (param1.equals("createReportECMS230GA")) {
-				sb.append("String pathDirReportECMS = \"/home/SELENIUM-ECMS-CLIENT/workspace/Commit_Result_ECMS_2_3_2_SNAPSHOT/rev\" + ");
+				sb.append("String pathDirReportECMS = \"/home/SELENIUM-ECMS-CLIENT/workspace/Commit_Result_ECMS_2_3_3_SNAPSHOT/rev\" + ");
                                 sb.append(param3);
 				sb.append(" + ");
 				sb.append("\"/\"");
@@ -677,7 +677,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("; \n");
 				sb.append("new File(pathDirReportECMS).mkdirs();\n");
 			} else if (param1.equals("copyReportECMS230GA")) {
-				sb.append("File fOrigECMS = new File(\"/home/SELENIUM-ECMS-CLIENT/workspace/Run_Selenium_on_ECMS_2_3_2_SNAPSHOT/target/tests.exoplatform.org/\"");
+				sb.append("File fOrigECMS = new File(\"/home/SELENIUM-ECMS-CLIENT/workspace/Run_Selenium_ECMS_2_3_3_SNAPSHOT/target/tests.exoplatform.org/\"");
 				sb.append(" + ");
                                 sb.append(param2);	       
                                 sb.append(");\n");
