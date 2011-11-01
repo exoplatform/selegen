@@ -91,14 +91,14 @@ Selenium.prototype.doTypeRandom = function(locator,string_length) {
 
 	var element = this.page().findElement(locator);
 
-        var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+        var chars = "ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
         var randomstring = '';
         for (var i=0; i<string_length; i++) {
             var rnum = Math.floor(Math.random() * chars.length);
             randomstring += chars.substring(rnum,rnum+1);
         }
         //return randomstring;
-		var valueToType ="test-"+randomstring;
+		var valueToType =randomstring;
 
 		 this.page().replaceText(element, valueToType);
     }
@@ -107,7 +107,7 @@ Selenium.prototype.doTypeRandom = function(locator,string_length) {
 
 	var element = this.page().findElement(locator);
 
-        var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+        var chars = "abcdefghiklmnopqrstuvwxyz";
         var randomstring = '';
         for (var i=0; i<string_length; i++) {
             var rnum = Math.floor(Math.random() * chars.length);
