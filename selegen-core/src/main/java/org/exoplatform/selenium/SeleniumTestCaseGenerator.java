@@ -556,7 +556,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("File fDestPLF30x = new File(pathDirReportPLF30x);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigPLF30x, fDestPLF30x); \n");
 			}else if (param1.equals("eXoCreateFolderReportPLF35x")) {
-				sb.append("String pathDirReportPLF35x = \"/home/SELENIUM-PLF3.5.X/workspace/Commit_Result_PLF_3_5_0_CR1/rev\" + ");
+				sb.append("String pathDirReportPLF35x = \"/home/SELENIUM-PLF3.5.X/workspace/Commit_Result_PLF_3_5_0_BETA3/rev\" + ");
                                 sb.append(param3);
 				sb.append(" + ");
 				sb.append("\"/\"");
@@ -565,7 +565,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("; \n");
 				sb.append("new File(pathDirReportPLF35x).mkdirs();\n");
 			} else if (param1.equals("eXocopyReportPLF35x")) {
-				sb.append("File fOrigPLF35x = new File(\"/home/SELENIUM-PLF3.5.X/workspace/Run_Selenium_on_PLF_3_5_0_CR1/target/tests.exoplatform.org/\"");
+				sb.append("File fOrigPLF35x = new File(\"/home/SELENIUM-PLF3.5.X/workspace/Run_Selenium_PLF_3_5_0_BETA3/target/tests.exoplatform.org/\"");
 				sb.append(" + ");
                                 sb.append(param2);	       
                                 sb.append(");\n");
