@@ -229,7 +229,40 @@ sb.append("@Test\n");
 				sb.append("\");\n");
                                 //sb.append("selenium.waitForPageToLoad(timeout);\n");
 
-			} else if (param1.equals("waitForElementPresent")) {
+			} else if (param1.equals("verifySelectedValue")) {
+				sb.append("assertTrue");
+				sb.append("(selenium.getSelectedValue(\"");
+				sb.append(param2);
+				sb.append("\").equals(\"");
+				sb.append(param3);
+				sb.append("\"));\n");
+                        }else if (param1.equals("waitForVisible")) {
+				sb.append("for (int second = 0;; second++) {\n");
+				sb.append(getTimeoutMessage(param1));
+				sb.append("try {\nif (selenium.isVisible(\"");
+				sb.append(param2);
+				sb.append("\"))\n break;\n }\n catch (Exception e) {}\n");
+				sb.append("Thread.sleep(1000);\n");
+				sb.append("}\n");
+			} else if (param1.equals("verifyVisible")) {
+			        sb.append("assertTrue(selenium.isVisible");
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\"));\n");
+			} else if (param1.equals("waitForNotVisible")) {
+				sb.append("for (int second = 0;; second++) {\n");
+				sb.append(getTimeoutMessage(param1));
+				sb.append("try {\nif (!selenium.isVisible(\"");
+				sb.append(param2);
+				sb.append("\"))\n break;\n }\n catch (Exception e) {}\n");
+				sb.append("Thread.sleep(1000);\n");
+				sb.append("}\n");
+                        } else if (param1.equals("verifyNotVisible")) {
+				sb.append("assertFalse(selenium.isVisible");
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\"));\n");
+                        }else if (param1.equals("waitForElementPresent")) {
 				sb.append("for (int second = 0;; second++) {\n");
 				sb.append("if (second >= 60) fail(\"timeout\");");
 				sb.append("try {\n if (selenium.isElementPresent(\"");
@@ -400,6 +433,8 @@ sb.append("@Test\n");
 				sb.append("\", selenium.getEval(\"");
 				sb.append(param2);
 				sb.append("\"));\n");
+			} else if (param1.equals("storeAttribute")) {
+				sb.append("String ").append(param3).append(" = ").append("selenium.getAttribute(\"").append(param2).append("\");\n");
 			} else if (param1.equals("keyDown") || param1.equals("keyUp") || param1.equals("keyPress")) {
 				sb.append("selenium.");
 				sb.append(param1);
