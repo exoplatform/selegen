@@ -318,7 +318,7 @@ sb.append("@Test\n");
 				sb.append("\"));\n");
 			} else if (param1.equals("dragAndDropToObject")) {
 				sb.append("selenium.dragAndDropToObject(\"").append(param2).append("\",\"").append(param3).append("\");\n");
-			} else if(param1.equals("assertConfirmation")) {
+			} else if(param1.equals("assertConfirmation") || param1.equals("verifyConfirmation")) {
 				param2 = replace(param2, "?", "[\\\\s\\\\S]");
 				sb.append("assertTrue(selenium.getConfirmation().matches(\"^");
 				sb.append(param2);
