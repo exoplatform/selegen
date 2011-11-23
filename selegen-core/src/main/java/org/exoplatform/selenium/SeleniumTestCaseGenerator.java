@@ -318,6 +318,25 @@ sb.append("@Test\n");
 				sb.append("\"));\n");
 			} else if (param1.equals("dragAndDropToObject")) {
 				sb.append("selenium.dragAndDropToObject(\"").append(param2).append("\",\"").append(param3).append("\");\n");
+			} else if (param1.equals("waitForValue")) {
+				sb.append("assertTrue(selenium.getValue(\"");
+				sb.append(param2);
+				sb.append("\").matches(\"^");
+				sb.append(param3);
+				sb.append("$\"));\n");
+			} else if (param1.equals("storeEval")) {
+				sb.append("String ").append(param3).append(" = selenium.getEval(\"").append(param2).append("\").toString();\n");
+			} else if (param1.equals("storeXpathCount")) {
+				sb.append("String ").append(param3).append(" = selenium.getXpathCount(\"").append(param2).append(
+				      "\").toString();\n");
+			} else if (param1.equals("waitForNotChecked")) {
+				sb.append("for (int second = 0;; second++) {\n");
+				sb.append(getTimeoutMessage(param1));
+				sb.append("try {\nif (!selenium.isChecked(\"");
+				sb.append(param2);
+				sb.append("\"))\n break;\n }\n catch (Exception e) {}\n");
+				sb.append("Thread.sleep(1000);\n");
+				sb.append("}\n");
 			} else if(param1.equals("assertConfirmation") || param1.equals("verifyConfirmation")) {
 				param2 = replace(param2, "?", "[\\\\s\\\\S]");
 				sb.append("assertTrue(selenium.getConfirmation().matches(\"^");
@@ -390,6 +409,11 @@ sb.append("@Test\n");
 				sb.append("\");\n");
 				sb.append("selenium.waitForPageToLoad(timeout);\n");
 			} else if (param1.equals("storeText")) {
+				sb.append("String ").append(param3).append(" = selenium.getText(\"").append(param2).append(
+				      "\").toString();\n");
+			}
+
+/*else if (param1.equals("storeText")) {
 				sb.append("String ");
 				sb.append(param3);
 				sb.append(" = selenium.getText(\"");
@@ -400,7 +424,8 @@ sb.append("@Test\n");
 				sb.append("\", ");
 				sb.append(param3);
 				sb.append(");\n");
-			} else if (param1.equals("verifyValue")) {
+			}*/
+ else if (param1.equals("verifyValue")) {
 				sb.append("assertEquals(\"");
 				sb.append(param3);
 				sb.append("\", selenium.getValue(\"");
