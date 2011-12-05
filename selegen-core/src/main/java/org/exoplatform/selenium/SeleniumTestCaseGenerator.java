@@ -556,7 +556,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("File fDestPLF30x = new File(pathDirReportPLF30x);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigPLF30x, fDestPLF30x); \n");
 			}else if (param1.equals("eXoCreateFolderReportPLF35x")) {
-				sb.append("String pathDirReportPLF35x = \"/home/SELENIUM-PLF3.5.X/workspace/Commit_Result_PLF_3_5_0_GA_SNAPSHOT/rev\" + ");
+				sb.append("String pathDirReportPLF35x = \"/home/SELENIUM-PLF3.5.X/workspace/Commit_Result_PLF_3_5_1_SNAPSHOT/rev\" + ");
                                 sb.append(param3);
 				sb.append(" + ");
 				sb.append("\"/\"");
@@ -565,7 +565,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("; \n");
 				sb.append("new File(pathDirReportPLF35x).mkdirs();\n");
 			} else if (param1.equals("eXocopyReportPLF35x")) {
-				sb.append("File fOrigPLF35x = new File(\"/home/SELENIUM-PLF3.5.X/workspace/Run_Selenium_PLF_3_5_0_GA_SNAPSHOT/target/tests.exoplatform.org/\"");
+				sb.append("File fOrigPLF35x = new File(\"/home/SELENIUM-PLF3.5.X/workspace/Run_Selenium_PLF_3_5_1_SNAPSHOT/target/tests.exoplatform.org/\"");
 				sb.append(" + ");
                                 sb.append(param2);	       
                                 sb.append(");\n");
@@ -866,7 +866,8 @@ public class SeleniumTestCaseGenerator {
 				sb.append("\\\",\\\"");
                                 sb.append(param3);
 				sb.append("\\\"));\n");
-			} else if (param1.equals("refreshAndWait")) {
+			} else if (param1.equals("refreshAndWait")) {//div[@id='QuickAddEventContainer']//td[@align='center']/div[2] not found
+
 				sb.append("selenium.refresh();\n");
 				sb.append("selenium.waitForPageToLoad(timeout);\n");
 			} else if (param1.equals("storeXpathCount")) {
