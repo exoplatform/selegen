@@ -850,11 +850,6 @@ public class SeleniumTestCaseGenerator {
 				sb.append(" = selenium.getValue(\"");
 				sb.append(param2);
 				sb.append("\");\n");
-				sb.append("RuntimeVariables.setValue(\"");
-				sb.append(param3);
-				sb.append("\", ");
-				sb.append(param3);
-				sb.append(");\n");
                         } else if (param1.equals("verifyLocation")) {
 				sb.append("TestCase.assertEquals(\"");
               			sb.append(param2);
