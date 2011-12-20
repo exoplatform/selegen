@@ -240,7 +240,18 @@ public class SeleniumTestCaseGenerator {
 				sb.append(param3);
 				sb.append("\");\n");
 			} else if (param1.equals("selectAndWait")) {
-				sb.append("selenium.select(\"");
+				sb.append("selenium.");
+				sb.append(param1);
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\", \"");
+				sb.append(param3);
+				sb.append("\");\n");
+				sb.append("selenium.waitForPageToLoad(timeout);\n");
+			} else if (param1.equals("typeAndWait")) {
+	                        sb.append("selenium.");
+				sb.append(param1);
+				sb.append("(\"");
 				sb.append(param2);
 				sb.append("\", \"");
 				sb.append(param3);
