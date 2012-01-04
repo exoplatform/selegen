@@ -418,7 +418,12 @@ public class SeleniumTestCaseGenerator {
 				sb.append("(\"");
 				sb.append(param2);
 				sb.append("\"));\n");
-                        } else if (param1.equals("waitForVisible")) {
+                        }else if (param1.equals("verifyNotSelectedLabel")) {
+				sb.append("TestCase.assertFalse(selenium.isVisible");
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\"));\n");
+                       } else if (param1.equals("waitForVisible")) {
 				sb.append("for (int second = 0;; second++) {\n");
 				sb.append(getTimeoutMessage(param1));
 				sb.append("try {\nif (selenium.isVisible(\"");
@@ -565,7 +570,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("File fDestPLF30x = new File(pathDirReportPLF30x);\n");
                                 sb.append("FileUtils.copyFileToDirectory(fOrigPLF30x, fDestPLF30x); \n");
 			}else if (param1.equals("eXoCreateFolderReportPLF35x")) {
-				sb.append("String pathDirReportPLF35x = \"/home/SELENIUM-PLF3.5.X/workspace/Commit_Result_PLF_3_5_1_SNAPSHOT/rev\" + ");
+				sb.append("String pathDirReportPLF35x = \"/home/SELENIUM-PLF3.5.X/workspace/Commit_Result_PLF_3_5_2_SNAPSHOT/rev\" + ");
                                 sb.append(param3);
 				sb.append(" + ");
 				sb.append("\"/\"");
@@ -574,7 +579,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append("; \n");
 				sb.append("new File(pathDirReportPLF35x).mkdirs();\n");
 			} else if (param1.equals("eXocopyReportPLF35x")) {
-				sb.append("File fOrigPLF35x = new File(\"/home/SELENIUM-PLF3.5.X/workspace/Run_Selenium_PLF_3_5_1_SNAPSHOT/target/tests.exoplatform.org/\"");
+				sb.append("File fOrigPLF35x = new File(\"/home/SELENIUM-PLF3.5.X/workspace/Run_Selenium_PLF_3_5_2_SNAPSHOT/target/tests.exoplatform.org/\"");
 				sb.append(" + ");
                                 sb.append(param2);	       
                                 sb.append(");\n");
@@ -589,6 +594,7 @@ public class SeleniumTestCaseGenerator {
 				sb.append(param2);
 				sb.append("; \n");
 				sb.append("new File(pathDirReportCS22X).mkdirs();\n");
+
 			} else if (param1.equals("copyReportCS22X")) {
 				sb.append("File fOrigCS22X = new File(\"/home/SELENIUM-CS-CLIENT/workspace/Run_Selenium_CS_2_2_5_SNAPSHOT/target/tests.exoplatform.org/\"");
 				sb.append(" + ");
