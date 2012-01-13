@@ -529,7 +529,13 @@ public class SeleniumTestCaseGenerator {
 				sb.append("selenium.keyPress(\"").append(param2).append("\",\"").append(param3).append("\");\n");
 			} else if (param1.equals("check")) {
 				sb.append("selenium.check(\"").append(param2).append("\");\n");
-			} else if (param1.equals("uncheck")) {
+                        } else if (param1.equals("captureEntirePageScreenshot")) {
+				sb.append("selenium.");
+				sb.append(param1);
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\", \"\");\n");                        
+                        } else if (param1.equals("uncheck")) {
 				sb.append("selenium.uncheck(\"").append(param2).append("\");\n");
 			} else if (param1.equals("verifyNotChecked")) {
 				sb.append("verifyFalse(selenium.isChecked(\"").append(param2).append("\"));\n");
